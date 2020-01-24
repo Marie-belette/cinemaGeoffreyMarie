@@ -71,4 +71,56 @@ public class MovieService implements IMovieService {
 		return movieRepository.findByDirectorName(directorName);
 	}
 
+	@Override
+	public Movie postMovie(Movie movie) {
+		Movie movieSaved = movieRepository.save(movie);
+		movieRepository.flush();
+		return movieSaved;
+	}
+	
+	@Override
+	public Optional<Movie> postActorMovie(int idActor, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		var actorOpt = personRepository.findById(idActor);
+		if (movieOpt.isPresent() && actorOpt.isPresent()) {
+			movieOpt.get().getActors().add(actorOpt.get());
+			movieRepository.flush();
+		}
+		return movieOpt;
+	}
+
+	@Override
+	public Optional<Movie> postDirectorMovie(int idDirector, int idMovie) {
+		var optMovie = movieRepository.findById(idMovie);
+		var optDirector = personRepository.findById(idDirector);
+		if (optMovie.isPresent() && optDirector.isPresent()) {
+			optMovie.get().setDirector(optDirector.get());
+		};
+		movieRepository.flush();
+		return optMovie;
+	}
+
+	@Override
+	public Optional<Movie> postTitleYearDurationDirector(Movie movie) {
+		var optMovie = movieRepository.findById(movie.getIdMovie());
+		optMovie.ifPresent(m -> {
+			m.setTitle(movie.getTitle());
+			m.setYear(movie.getYear());
+			m.setDuration(movie.getDuration());
+			m.setDirector(movie.getDirector());
+		});
+		movieRepository.flush();
+		return optMovie;
+	}
+
+	@Override
+	public Optional <Movie> deleteMovie(int idMovie) {
+		var movieToDelete = movieRepository.findById(idMovie);
+		movieToDelete.ifPresent(m -> { 
+			movieRepository.delete(m);
+			movieRepository.flush();
+		});
+		return movieToDelete;
+	}
+	
 }

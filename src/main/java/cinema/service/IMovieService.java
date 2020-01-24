@@ -18,4 +18,9 @@ public interface IMovieService {
 	Set<Movie> getMovieByTitleAndYear(String title, int year);
 	Set<Movie> getMovieByYearBetween( int year1, int year2);
 	Set<Movie> getMovieByDirectorName(String directorName);
+	Movie postMovie(Movie movie);
+	Optional<Movie> postActorMovie (int idActor, int idMovie);
+	Optional<Movie> postDirectorMovie (int idDirector, int idMovie);
+	Optional<Movie> postTitleYearDurationDirector(Movie movie) ;
+	Optional <Movie> deleteMovie (int idMovie);
 }
