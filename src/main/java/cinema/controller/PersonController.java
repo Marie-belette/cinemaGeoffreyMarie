@@ -29,35 +29,35 @@ public class PersonController {
 	@ResponseBody
 	public Set<Person> getfindByName(@RequestParam("n")String name) {
 
-		return personService.getfindByName(name);
+		return personService.findByName(name);
 		}
 	
 	@GetMapping("/nameIgnore")
 	@ResponseBody
 	public Set<Person> getfindByNameContainingIgnoreCase(@RequestParam("n") String name) {
 		// TODO Auto-generated method stub
-		return personService.getfindByNameContainingIgnoreCase(name);
+		return personService.findByNameContainingIgnoreCase(name);
 	}
 	
 	@GetMapping("/birthdate")
 	@ResponseBody
 	public Set<Person> getfindByBirthdateYear(int year) {
 		// TODO Auto-generated method stub
-		return personService.getfindByBirthdateYear(year);
+		return personService.findByBirthdateYear(year);
 	}
 	
 	@GetMapping("/birthdateBetween")
 	@ResponseBody
 	public Set<Person> getfindByBirthdateYearBetween(int year, int years) {
 		// TODO Auto-generated method stub
-		return personService.getfindByBirthdateYearBetween(year, years);
+		return personService.findByBirthdateYearBetween(year, years);
 	}
 	
 	@GetMapping ("/birthdateGreaterThan")
 	@ResponseBody
 	public Set<Person> getfindByBithdateYearGreaterThan(int year) {
 		// TODO Auto-generated method stub
-		return personService.getfindByBithdateYearGreaterThan(year);
+		return personService.findByBithdateYearGreaterThan(year);
 	}
 	
 	@PostMapping
