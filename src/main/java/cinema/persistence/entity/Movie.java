@@ -31,7 +31,7 @@ public class Movie {
 	private Person director;
 	private List<Person> actors;
 	private String originalTitle;
-	private Object rating ;
+	private Rating rating ;
 	private String genre;
 	private Format format;
 	private Classification classification;
@@ -138,11 +138,11 @@ public class Movie {
 		this.originalTitle = originalTitle;
 	}
 
-	public Object getRating() {
+	public Rating getRating() {
 		return rating;
 	}
 
-	public void setRating(Object rating) {
+	public void setRating(Rating rating) {
 		this.rating = rating;
 	}
 

@@ -113,15 +113,6 @@ class TestMappingEntities {
 		repoMovies.flush();
 	}
 	
-	@Test
-	void testLazyActors() {
-		//read a movie : select the movie + its director
-		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
-		//read actors
-		// var actors = impitoyable.getActors();
-		// System.out.println(actors);
-	}
-	
 //	@Rollback(false)
 //	@Test
 //	void scenarion08MovieAddActor() {

@@ -19,7 +19,6 @@ import javax.persistence.Table;
 		private Integer idPerson;
 		private String name;
 		private LocalDate birthdate;
-		private Integer age;
 		private String nationalities;
 		private String biography;
 		
@@ -33,7 +32,6 @@ import javax.persistence.Table;
 			this.idPerson = idPerson;
 			this.name = name;
 			this.birthdate = birthdate;
-			this.age = age;
 			this.nationalities = nationalities;
 			this.biography = biography;
 		}
@@ -88,9 +86,9 @@ import javax.persistence.Table;
 			this.birthdate = birthdate;
 		}
 			
-		public OptionalInt getAge() {
+		public int getAge() {
 			if (Objects.isNull(birthdate)) {
-				return OptionalInt.empty();
+				return OptionalInt.empty().getAsInt();
 		}
 			LocalDate todayFull = LocalDate.now();
 			MonthDay birthday = MonthDay.of(
@@ -101,13 +99,9 @@ import javax.persistence.Table;
 			if (today.compareTo(birthday) < 0) {
 				-- deltaYear;
 			}
-			return OptionalInt.of(deltaYear);
-			
+			int age = OptionalInt.of(deltaYear).getAsInt();
+			return age;
 			// TODO equals + hashCode
-		}
-
-		public void setAge(int age) {
-			this.age = age;
 		}
 
 		public String getNationalities() {
