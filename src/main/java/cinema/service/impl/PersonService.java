@@ -21,32 +21,32 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public Set<Person> getfindByName(String name) { 
-		return personService.getfindByName(name);
+	public Set<Person>findByName(String name) { 
+		return personService.findByName(name);
 	}
 
 	@Override
-	public Set<Person> getfindByNameContainingIgnoreCase(String name) {
+	public Set<Person>findByNameContainingIgnoreCase(String name) {
 		// TODO Auto-generated method stub
-		return personService.getfindByNameContainingIgnoreCase(name);
+		return personService.findByNameContainingIgnoreCase(name);
 	}
 
 	@Override
-	public Set<Person> getfindByBirthdateYear(int year) {
+	public Set<Person>findByBirthdateYear(int year) {
 		// TODO Auto-generated method stub
-		return personService.getfindByBirthdateYear(year);
+		return personService.findByBirthdateYear(year);
 	}
 
 	@Override
-	public Set<Person> getfindByBirthdateYearBetween(int year, int years) {
+	public Set<Person>findByBirthdateYearBetween(int year, int years) {
 		// TODO Auto-generated method stub
-		return personService.getfindByBirthdateYearBetween(year, years);
+		return personService.findByBirthdateYearBetween(year, years);
 	}
 	
 	@Override
-	public Set<Person> getfindByBithdateYearGreaterThan(int year) {
+	public Set<Person>findByBithdateYearGreaterThan(int year) {
 		// TODO Auto-generated method stub
-		return personService.getfindByBithdateYearGreaterThan(year);
+		return personService.findByBithdateYearGreaterThan(year);
 	}
 
 	

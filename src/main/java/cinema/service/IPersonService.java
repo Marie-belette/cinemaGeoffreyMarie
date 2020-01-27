@@ -10,15 +10,15 @@ import cinema.persistence.entity.Person;
 public interface IPersonService {
 
 	List<Person> getAllPersons();
-
-	Set<Person>getfindByName(String name);
 	
-	Set<Person>getfindByNameContainingIgnoreCase(String name);
+	Set<Person>findByNameContainingIgnoreCase(String name);
 	
 	@Query("select p from Person p where extract(year from birthdate) = ?1")
-	Set<Person>getfindByBirthdateYear(int year);
+	Set<Person>findByBirthdateYear(int year);
 	
-	Set<Person>getfindByBirthdateYearBetween(int year, int years);
+	Set<Person>findByBirthdateYearBetween(int year, int years);
 	
-	Set<Person>getfindByBithdateYearGreaterThan(int year);
+	Set<Person>findByBithdateYearGreaterThan(int year);
+
+	Set<Person>findByName(String name);
 }
