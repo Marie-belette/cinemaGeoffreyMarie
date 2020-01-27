@@ -5,11 +5,15 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IPersonService;
 
+@Service
+@Transactional
 public class PersonService implements IPersonService {
 
 	@Autowired
