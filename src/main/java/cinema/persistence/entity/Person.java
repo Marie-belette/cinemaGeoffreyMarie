@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import cinema.enumeration.Nationalities;
+
 	@Entity
 	@Table(name = "Persons")
 	public class Person {
@@ -20,14 +22,14 @@ import javax.persistence.Table;
 		private String name;
 		private LocalDate birthdate;
 		private int age;
-		private String nationalities;
+		private Nationalities nationalities;
 		private String biography;
 		
 		public Person() {
 			super();
 		}
 
-		public Person(Integer idPerson, String name, LocalDate birthdate, int age, String nationalities,
+		public Person(Integer idPerson, String name, LocalDate birthdate, int age, Nationalities nationalities,
 				String biography) {
 			super();
 			this.idPerson = idPerson;
@@ -44,7 +46,7 @@ import javax.persistence.Table;
 			this.birthdate = birthdate;
 		}
 
-		public Person(Integer idPerson, String name, LocalDate birthdate, int age, String nationalities) {
+		public Person(Integer idPerson, String name, LocalDate birthdate, int age, Nationalities nationalities) {
 			this(null, name, birthdate,age,nationalities,null);	
 		}
 		
@@ -58,6 +60,14 @@ import javax.persistence.Table;
 		
 		public Person(String name) {
 			this();	
+		}
+		
+		public Person(String name, LocalDate birthdate, Nationalities nationalities) {
+			
+			this.name = name;
+			this.birthdate = birthdate;
+			this.nationalities = nationalities;
+			
 		}
 		
 		@Id
@@ -107,11 +117,11 @@ import javax.persistence.Table;
 			this.age = age;
 		}
 
-		public String getNationalities() {
+		public Nationalities getNationalities() {
 			return nationalities;
 		}
 
-		public void setNationalities(String nationalities) {
+		public void setNationalities(Nationalities nationalities) {
 			this.nationalities = nationalities;
 		}
 

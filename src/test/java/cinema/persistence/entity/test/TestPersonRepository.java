@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import cinema.enumeration.Nationalities;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.PersonRepository;
 
@@ -39,7 +40,7 @@ public class TestPersonRepository {
 		@Rollback(false)
 		@Test
 		void testSaveData() {
-			var joaq = new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28));
+			var joaq = new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28),Nationalities.FRANCAIS);
 			var gege = new Person ("Gérard Darmon", LocalDate.of(1948,  2, 29));
 			var todd = new Person ("Todd Phillips", LocalDate.of(1970, 12, 20));
 			var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));
