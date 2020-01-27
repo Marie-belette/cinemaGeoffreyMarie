@@ -3,7 +3,7 @@ package cinema.persistence.entity;
 import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.Objects;
-import java.util.OptionalInt;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +19,7 @@ import javax.persistence.Table;
 		private Integer idPerson;
 		private String name;
 		private LocalDate birthdate;
+		private int age;
 		private String nationalities;
 		private String biography;
 		
@@ -32,6 +33,7 @@ import javax.persistence.Table;
 			this.idPerson = idPerson;
 			this.name = name;
 			this.birthdate = birthdate;
+			this.age = age;
 			this.nationalities = nationalities;
 			this.biography = biography;
 		}
@@ -85,23 +87,24 @@ import javax.persistence.Table;
 		public void setBirthdate(LocalDate birthdate) {
 			this.birthdate = birthdate;
 		}
-			
+
 		public int getAge() {
-			if (Objects.isNull(birthdate)) {
-				return OptionalInt.empty().getAsInt();
-		}
+			
 			LocalDate todayFull = LocalDate.now();
 			MonthDay birthday = MonthDay.of(
 					birthdate.getMonthValue(), 
 					birthdate.getDayOfMonth());
-			MonthDay today = MonthDay.now()
-	;		int deltaYear = todayFull.getYear() - birthdate.getYear();
+			MonthDay today = MonthDay.now();		
+			int age = todayFull.getYear() - birthdate.getYear();
 			if (today.compareTo(birthday) < 0) {
-				-- deltaYear;
+				-- age;
 			}
-			int age = OptionalInt.of(deltaYear).getAsInt();
+		
 			return age;
-			// TODO equals + hashCode
+		}
+
+		public void setAge(int age) {
+			this.age = age;
 		}
 
 		public String getNationalities() {
