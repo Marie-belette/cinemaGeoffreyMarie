@@ -40,8 +40,8 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public Set<Person>findByBirthdateYearBetween(int year, int years) {
-		return personRepository.findByBirthdateYearBetween(year, years);
+	public Set<Person>findByBirthdateYearBetween(int year1, int year2) {
+		return personRepository.findByBirthdateYearBetween(year1, year2);
 	}
 	
 	@Override

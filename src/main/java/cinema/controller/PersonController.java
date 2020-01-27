@@ -52,8 +52,8 @@ public class PersonController {
 	
 	@GetMapping("/birthdateBetween")
 	@ResponseBody
-	public Set<Person> findByBirthdateYearBetween(@RequestParam("b1") int year, @RequestParam("b2") int years) {
-		return personService.findByBirthdateYearBetween(year, years);
+	public Set<Person> findByBirthdateYearBetween(@RequestParam("b1") int year1, @RequestParam("b2") int year2) {
+		return personService.findByBirthdateYearBetween(year1, year2);
 	}
 	
 	@GetMapping ("/birthdateGreaterThan")
