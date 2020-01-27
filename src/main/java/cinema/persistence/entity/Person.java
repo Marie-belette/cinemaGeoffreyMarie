@@ -1,7 +1,9 @@
 package cinema.persistence.entity;
 
 import java.time.LocalDate;
+import java.time.MonthDay;
 import java.util.Objects;
+import java.util.OptionalInt;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -99,12 +101,23 @@ import javax.persistence.Table;
 		
 		
 		
-		public int getAge() {
-			int annee = birthdate.getYear();
-			int annee2 = LocalDate.now().getYear();
-			return annee2 - annee;
+		public OptionalInt getAge() {
+			if (Objects.isNull(birthdate)) {
+				return OptionalInt.empty();
 		}
-
+			LocalDate todayFull = LocalDate.now();
+			MonthDay birthday = MonthDay.of(
+					birthdate.getMonthValue(), 
+					birthdate.getDayOfMonth());
+			MonthDay today = MonthDay.now()
+	;		int deltaYear = todayFull.getYear() - birthdate.getYear();
+			if (today.compareTo(birthday) < 0) {
+				-- deltaYear;
+			}
+			return OptionalInt.of(deltaYear);
+			
+			// TODO equals + hashCode
+		}
 
 
 		public void setAge(int age) {
@@ -149,6 +162,7 @@ import javax.persistence.Table;
 			.toString();
 		}
 		
-	
+		
+		
 	
 }
