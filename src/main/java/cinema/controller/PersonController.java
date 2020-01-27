@@ -62,7 +62,8 @@ public class PersonController {
 		return personService.findByBithdateYearGreaterThan(year);
 	}
 	
-	@PostMapping
+	@PostMapping ("/addPerson")
+	@ResponseBody
 	public Person addPerson(@RequestBody Person person) {
 	return personService.postPerson(person);
 	}
