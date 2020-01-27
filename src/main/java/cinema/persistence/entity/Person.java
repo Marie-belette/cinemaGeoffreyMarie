@@ -19,16 +19,14 @@ import javax.persistence.Table;
 		private Integer idPerson;
 		private String name;
 		private LocalDate birthdate;
-		private int age;
+		private Integer age;
 		private String nationalities;
 		private String biography;
 		
 		public Person() {
 			super();
 		}
-		
-		
-		
+
 		public Person(Integer idPerson, String name, LocalDate birthdate, int age, String nationalities,
 				String biography) {
 			super();
@@ -38,39 +36,30 @@ import javax.persistence.Table;
 			this.age = age;
 			this.nationalities = nationalities;
 			this.biography = biography;
-
 		}
 		
+		public Person(String name, LocalDate birthdate) {
+			super();
+			this.name = name;
+			this.birthdate = birthdate;
+		}
 
 		public Person(Integer idPerson, String name, LocalDate birthdate, int age, String nationalities) {
 			this(null, name, birthdate,age,nationalities,null);	
-
 		}
 		
 		public Person(String name, LocalDate birthdate, int age, String biography) {
 			this(null,name, birthdate,age,null,biography);	
-
 		}
 		
 		public Person(String name, LocalDate birthdate, int age) {
 			this(null, name, birthdate,age,null,null);	
-
 		}
 		
-//		public Person(String name, LocalDate birthdate) {
-//			this(null, name, birthdate,null,null,null);	
-//		}
-//		public Person(String name) {
-//			this(null, name, null,null, null,null);	
-//		}
-//		
+		public Person(String name) {
+			this();	
+		}
 		
-		
-		
-		
-		
-		
-
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "id_person")
@@ -98,9 +87,7 @@ import javax.persistence.Table;
 		public void setBirthdate(LocalDate birthdate) {
 			this.birthdate = birthdate;
 		}
-		
-		
-		
+			
 		public OptionalInt getAge() {
 			if (Objects.isNull(birthdate)) {
 				return OptionalInt.empty();
@@ -119,36 +106,25 @@ import javax.persistence.Table;
 			// TODO equals + hashCode
 		}
 
-
 		public void setAge(int age) {
 			this.age = age;
 		}
-
-
 
 		public String getNationalities() {
 			return nationalities;
 		}
 
-
-
 		public void setNationalities(String nationalities) {
 			this.nationalities = nationalities;
 		}
-
-
 
 		public String getBiography() {
 			return biography;
 		}
 
-
-
 		public void setBiography(String biography) {
 			this.biography = biography;
 		}
-
-
 
 		@Override
 		public String toString() {
@@ -161,8 +137,5 @@ import javax.persistence.Table;
 			.append(idPerson)
 			.toString();
 		}
-		
-		
-		
-	
+
 }
