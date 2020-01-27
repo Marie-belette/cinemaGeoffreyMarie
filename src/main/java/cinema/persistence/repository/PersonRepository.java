@@ -11,6 +11,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 
 	Set<Person>findByName(String name);
 	Set<Person>findByNameContainingIgnoreCase(String name);
+
 	@Query("select p from Person p where extract(year from p.birthdate) = ?1")
 	Set<Person>findByBirthdateYear(int year);
 	Set<Person>findByBirthdateYearBetween(int year1, int year2);

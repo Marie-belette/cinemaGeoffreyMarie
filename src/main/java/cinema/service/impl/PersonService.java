@@ -7,46 +7,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import cinema.persistence.entity.Person;
+import cinema.persistence.repository.PersonRepository;
 import cinema.service.IPersonService;
 
 public class PersonService implements IPersonService {
 
 	@Autowired
-	IPersonService personService;
+	PersonRepository personRepository;
 	
 	@Override
 	public List<Person> getAllPersons() {
-		// TODO Auto-generated method stub
-		return personService.getAllPersons() ;
+	
+		return personRepository.findAll() ;
 	}
 
 	@Override
 	public Set<Person>findByName(String name) { 
-		return personService.findByName(name);
+		return personRepository.findByName(name);
 	}
 
 	@Override
 	public Set<Person>findByNameContainingIgnoreCase(String name) {
-		// TODO Auto-generated method stub
-		return personService.findByNameContainingIgnoreCase(name);
+		
+		return personRepository.findByNameContainingIgnoreCase(name);
 	}
 
 	@Override
 	public Set<Person>findByBirthdateYear(int year) {
-		// TODO Auto-generated method stub
-		return personService.findByBirthdateYear(year);
+		
+		return personRepository.findByBirthdateYear(year);
 	}
 
 	@Override
 	public Set<Person>findByBirthdateYearBetween(int year, int years) {
-		// TODO Auto-generated method stub
-		return personService.findByBirthdateYearBetween(year, years);
+		
+		return personRepository.findByBirthdateYearBetween(year, years);
 	}
 	
 	@Override
 	public Set<Person>findByBithdateYearGreaterThan(int year) {
-		// TODO Auto-generated method stub
-		return personService.findByBithdateYearGreaterThan(year);
+		
+		return personRepository.findByBithdateYearGreaterThan(year);
 	}
 
 	
