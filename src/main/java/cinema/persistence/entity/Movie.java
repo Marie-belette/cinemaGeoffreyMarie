@@ -14,10 +14,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import cinema.data.Classification;
-import cinema.data.Couleur;
-import cinema.data.Format;
-import cinema.data.Rating;
+import cinema.enumeration.Classification;
+import cinema.enumeration.Couleur;
+import cinema.enumeration.Format;
+import cinema.enumeration.Rating;
 
 @Entity
 @Table(name = "movies")

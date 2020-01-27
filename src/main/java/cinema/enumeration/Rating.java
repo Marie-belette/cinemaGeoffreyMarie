@@ -1,4 +1,4 @@
-package cinema.data;
+package cinema.enumeration;
 
 public enum Rating {
 	
