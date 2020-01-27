@@ -25,7 +25,7 @@ public class MovieController {
 	
 	@Autowired
 	IMovieService movieService;
-		
+	
 	@GetMapping
 	@ResponseBody
 	public List<Movie> allMovies() {
