@@ -21,8 +21,8 @@ import cinema.enumeration.Nationalities;
 		private Integer idPerson;
 		private String name;
 		private LocalDate birthdate;
-		private int age;
 		private Nationalities nationalities;
+		private Integer age;
 		private String biography;
 		
 		public Person() {
@@ -98,8 +98,8 @@ import cinema.enumeration.Nationalities;
 			this.birthdate = birthdate;
 		}
 
+		@Column(name = "age")
 		public int getAge() {
-			
 			LocalDate todayFull = LocalDate.now();
 			MonthDay birthday = MonthDay.of(
 					birthdate.getMonthValue(), 
@@ -109,7 +109,6 @@ import cinema.enumeration.Nationalities;
 			if (today.compareTo(birthday) < 0) {
 				-- age;
 			}
-		
 			return age;
 		}
 
