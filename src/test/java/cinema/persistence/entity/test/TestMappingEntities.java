@@ -3,8 +3,6 @@ package cinema.persistence.entity.test;
  * this is not a unit test case
  */
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDate;
 import java.util.List;
 

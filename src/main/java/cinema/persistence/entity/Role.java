@@ -1,17 +1,13 @@
 package cinema.persistence.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "role")
+@Table(name = "act")
 public class Role {
 
-	private Integer idRole;
 	private String name;
 	
 	public Role() {
@@ -20,20 +16,18 @@ public class Role {
 	
 	public Role(Integer idRole, String name) {
 		super();
-		this.idRole = idRole;
 		this.name = name;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_role")
-	public Integer getIdRole() {
-		return idRole;
-	}
-
-	public void setIdRole(Integer idRole) {
-		this.idRole = idRole;
-	}
+    RoleID pk;
+    public RoleID getPk() {
+        return pk;
+    }
+    
+    public void setPk(RoleID pk) {
+        this.pk = pk;
+    }
 
 	public String getName() {
 		return name;
@@ -41,5 +35,21 @@ public class Role {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Movie getMovie() {
+        return getPk().getMovie();
+	}
+
+	public void setFilm(Movie movie) {
+	        getPk().setMovie(movie);
+	}
+	
+	public Person getActor() {
+	        return getPk().getActor();
+	}
+
+	public void setActor(Person actor) {
+	        getPk().setActor(actor);
 	}
 }
