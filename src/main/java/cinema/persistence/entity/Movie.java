@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import cinema.enumeration.Classification;
-import cinema.enumeration.Couleur;
+import cinema.enumeration.Color;
 import cinema.enumeration.Format;
 import cinema.enumeration.Rating;
 
@@ -36,7 +36,7 @@ public class Movie {
 	private Format format;
 	private Classification classification;
 	private String synopsis;
-	private Couleur couleur;
+	private Color color;
 	
 	//@Transient
 	// private String director; Ce sont les attributs qui ne sont pas "persistent", donc qui ne seront pas sauvegardés (côté Database)
@@ -46,7 +46,7 @@ public class Movie {
 	}
 
 	public Movie(Integer idMovie, String title, String originalTitle, Integer year, Integer duration, Person director, String genre, 
-			Rating rating, Format format, Classification classification, String synopsis, Couleur couleur) {
+			Rating rating, Format format, Classification classification, String synopsis, Color color) {
 		super();
 		this.idMovie = idMovie;
 		this.title = title;
@@ -60,7 +60,7 @@ public class Movie {
 		this.format = format;
 		this.classification = classification;
 		this.synopsis = synopsis;
-		this.couleur = couleur;
+		this.color = color;
 	}
 	
 	public Movie(String title, Integer year, Integer duration, Person director) {
@@ -178,12 +178,12 @@ public class Movie {
 		this.synopsis = synopsis;
 	}
 
-	public Couleur getCouleur() {
-		return couleur;
+	public Color getColor() {
+		return color;
 	}
 
-	public void setCouleur(Couleur couleur) {
-		this.couleur = couleur;
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 	@ManyToMany //(fetch = FetchType.EAGER)

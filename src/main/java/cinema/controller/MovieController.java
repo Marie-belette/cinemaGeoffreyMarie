@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinema.enumeration.Classification;
+import cinema.enumeration.Color;
+import cinema.enumeration.Format;
+import cinema.enumeration.Rating;
 import cinema.persistence.entity.Movie;
 import cinema.service.IMovieService;
 
@@ -80,6 +84,48 @@ public class MovieController {
 		return movieService.getMovieByActorId(idActor);
 	}
 	
+	@GetMapping("/byOriginalTitle")
+	@ResponseBody
+	public Set<Movie> getMovieByOriginalTitle(@RequestParam("ot") String originalTitle) {
+		return movieService.getMovieByOriginalTitle(originalTitle);
+	}
+
+	@GetMapping("/byGenre")
+	@ResponseBody
+	public Set<Movie> getMovieByGenre(@RequestParam("g") String genre) {
+		return movieService.getMovieByGenre(genre);
+	}
+
+	@GetMapping("/byRating")
+	@ResponseBody
+	public Set<Movie> getMovieByRatingGreaterThan(@RequestParam("r") int rating) {
+		return movieService.getMovieByRatingGreaterThan(rating);
+	}
+
+	@GetMapping ("/byFormat")
+	@ResponseBody
+	public Set<Movie> getMovieByFormat(@RequestParam("f")Format format) {
+		return movieService.getMovieByFormat(format);
+	}
+
+	@GetMapping("/byClassification")
+	@ResponseBody
+	public Set<Movie> getMovieByClassificationLesserThan(@RequestParam("c")Classification classification) {
+		return movieService.getMovieByClassificationLessThan(classification);
+	}
+
+	@GetMapping("/byColor")
+	@ResponseBody
+	public Set<Movie> getMovieByColor(@RequestParam("col") Color color) {
+		return movieService.getMovieByColor(color);
+	}
+
+	@GetMapping("/bySynopsisWords")
+	@ResponseBody
+	public Set<Movie> getMovieBySynopsis(@RequestParam("sy")String synopsis) {
+		return movieService.getMovieBySynopsis(synopsis);
+	}
+	
 	@PostMapping("/addMovie")
 	@ResponseBody
 	public Movie addMovie(@RequestBody Movie movie) {
@@ -97,6 +143,37 @@ public class MovieController {
 	@ResponseBody
 	public  Optional<Movie> setDirector(@RequestParam("m") int idMovie, @RequestParam("d") int idDirector) {
 		return movieService.postDirectorMovie(idDirector, idMovie);
+	}
+	
+	@PutMapping("/setGenre")
+	@ResponseBody
+	public Optional<Movie> setGenre(@RequestParam("g") String genre, @RequestParam("m") int idMovie) {		
+		return movieService.postGenreMovie(genre, idMovie);
+
+	}
+	
+	@PutMapping("/setRating")
+	@ResponseBody
+	public Optional<Movie> setRating(@RequestParam("r")Rating rating, @RequestParam("m") int idMovie) {
+		return movieService.postRatingMovie(rating, idMovie);
+	}
+	
+	@PutMapping("/setClassification")
+	@ResponseBody
+	public Optional<Movie> setClassificationMovie(@RequestParam ("cl")Classification classification, @RequestParam("m") int idMovie) {
+		return movieService.postClassificationMovie(classification, idMovie);
+	}
+	
+	@PutMapping("/setSynopsis")
+	@ResponseBody
+	public Optional<Movie> setSynopsisMovie(@RequestBody String synopsis, @RequestParam("m") int idMovie) {
+		return movieService.postSynopsisMovie(synopsis, idMovie);
+	}
+	
+	@PutMapping("/setColor")
+	@ResponseBody
+	public Optional<Movie> setColorMovie(@RequestParam ("co")Color color, @RequestParam("m") int idMovie) {
+		return movieService.postColorMovie(color, idMovie);
 	}
 	
 	@PutMapping("/modify")
