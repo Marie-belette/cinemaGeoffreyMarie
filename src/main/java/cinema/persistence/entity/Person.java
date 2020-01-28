@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import cinema.enumeration.Nationalities;
@@ -22,6 +24,7 @@ import cinema.enumeration.Nationalities;
 		private LocalDate birthdate;
 		private Nationalities nationalities;
 		private String biography;
+		private Role role;
 
 		
 		public Person() {
@@ -29,13 +32,14 @@ import cinema.enumeration.Nationalities;
 		}
 
 		public Person(Integer idPerson, String name, LocalDate birthdate, Nationalities nationalities,
-				String biography) {
+				String biography, Role role) {
 			super();
 			this.idPerson = idPerson;
 			this.name = name;
 			this.birthdate = birthdate;
 			this.nationalities = nationalities;
 			this.biography = biography;
+			this.role = role;
 		}
 		
 		public Person(String name, LocalDate birthdate) {
@@ -45,13 +49,18 @@ import cinema.enumeration.Nationalities;
 		}
 		
 		public Person(String name, LocalDate birthdate, Nationalities nationalities, String biography) {
-			this(null, name, birthdate,nationalities,biography);	
+			this(null, name, birthdate,nationalities,biography, null);	
 		}
 		
 		public Person(String name, LocalDate birthdate, String biography) {
-			this(null,name, birthdate,null,biography);	
+			this(null,name, birthdate,null,biography, null);	
 		}
 		
+		@OneToMany
+		@JoinColumn(name="id_role", nullable=true)
+		public Role getRole() {
+			return role;
+		}
 		
 		public Person(String name) {
 			this();	
