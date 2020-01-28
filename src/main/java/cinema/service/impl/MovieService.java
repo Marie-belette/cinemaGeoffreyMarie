@@ -86,7 +86,7 @@ public class MovieService implements IMovieService {
 	}
 
 	@Override
-	public Set<Movie> getMovieByRatingGreaterThan(int rating) {
+	public Set<Movie> getMovieByRatingGreaterThan(Rating rating) {
 		return movieRepository.findByRatingGreaterThan(rating);
 	}
 
@@ -205,5 +205,14 @@ public class MovieService implements IMovieService {
 			movieRepository.flush();
 		});
 		return movieToDelete;
+	}
+
+	@Override
+	public Optional<Movie> postOriginalTitleMovie(String originalTitle, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setOriginalTitle(originalTitle);
+		});
+		return movieOpt;
 	}
 }

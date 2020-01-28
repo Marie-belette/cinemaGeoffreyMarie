@@ -29,7 +29,7 @@ public interface IMovieService {
 	Optional <Movie> deleteMovie (int idMovie);
 	Set<Movie> getMovieByOriginalTitle(String originalTitle);
 	Set<Movie> getMovieByGenre(String genre);
-	Set<Movie> getMovieByRatingGreaterThan(int rating);
+	Set<Movie> getMovieByRatingGreaterThan(Rating rating);
 	Set<Movie> getMovieByFormat(Format format);
 	Set<Movie> getMovieByClassificationLessThan(Classification classification);
 	Set<Movie> getMovieByColor(Color color);
@@ -39,4 +39,5 @@ public interface IMovieService {
 	Optional<Movie> postClassificationMovie(Classification classification, int idMovie);
 	Optional<Movie> postSynopsisMovie(String synopsis, int idMovie);
 	Optional<Movie> postColorMovie(Color color, int idMovie);
+	Optional<Movie> postOriginalTitleMovie(String originalTitle, int idMovie);
 }

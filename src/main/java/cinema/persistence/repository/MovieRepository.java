@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import cinema.enumeration.Classification;
 import cinema.enumeration.Color;
 import cinema.enumeration.Format;
+import cinema.enumeration.Rating;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 
@@ -27,7 +28,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	Set<Movie> findByActorsName(String actorName);
 	Set<Movie> findByOriginalTitleContainingIgnoreCase(String originalTitle);
 	Set<Movie> findByGenreContainingIgnoreCase(String genre);
-	Set<Movie> findByRatingGreaterThan(int rating);
+	Set<Movie> findByRatingGreaterThan(Rating rating);
 	Set<Movie> findByFormat(Format format);
 	Set<Movie> findByColor(Color color);
 	Set<Movie> findBySynopsisContainingIgnoreCase(String synopsis);

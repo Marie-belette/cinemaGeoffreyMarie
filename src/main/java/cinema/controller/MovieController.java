@@ -98,7 +98,7 @@ public class MovieController {
 
 	@GetMapping("/byRating")
 	@ResponseBody
-	public Set<Movie> getMovieByRatingGreaterThan(@RequestParam("r") int rating) {
+	public Set<Movie> getMovieByRatingGreaterThan(@RequestParam("r") Rating rating) {
 		return movieService.getMovieByRatingGreaterThan(rating);
 	}
 
@@ -145,38 +145,43 @@ public class MovieController {
 		return movieService.postDirectorMovie(idDirector, idMovie);
 	}
 	
-	@PutMapping("/setGenre")
+	@PostMapping("/setOriginalTitle")
+	@ResponseBody
+	public  Optional<Movie> setOriginalTitle(@RequestParam("ot") String originalTitle, @RequestParam("m") int idMovie) {
+		return movieService.postOriginalTitleMovie(originalTitle, idMovie);
+	}
+	
+	@PostMapping("/setGenre")
 	@ResponseBody
 	public Optional<Movie> setGenre(@RequestParam("g") String genre, @RequestParam("m") int idMovie) {		
 		return movieService.postGenreMovie(genre, idMovie);
-
 	}
 	
-	@PutMapping("/setRating")
+	@PostMapping("/setRating")
 	@ResponseBody
 	public Optional<Movie> setRating(@RequestParam("r")Rating rating, @RequestParam("m") int idMovie) {
 		return movieService.postRatingMovie(rating, idMovie);
 	}
 	
-	@PutMapping("/setClassification")
+	@PostMapping("/setClassification")
 	@ResponseBody
 	public Optional<Movie> setClassificationMovie(@RequestParam ("cl")Classification classification, @RequestParam("m") int idMovie) {
 		return movieService.postClassificationMovie(classification, idMovie);
 	}
 	
-	@PutMapping("/setSynopsis")
+	@PostMapping("/setSynopsis")
 	@ResponseBody
-	public Optional<Movie> setSynopsisMovie(@RequestBody String synopsis, @RequestParam("m") int idMovie) {
+	public Optional<Movie> setSynopsisMovie(@RequestParam ("sy") String synopsis, @RequestParam("m") int idMovie) {
 		return movieService.postSynopsisMovie(synopsis, idMovie);
 	}
 	
-	@PutMapping("/setColor")
+	@PostMapping("/setColor")
 	@ResponseBody
 	public Optional<Movie> setColorMovie(@RequestParam ("co")Color color, @RequestParam("m") int idMovie) {
 		return movieService.postColorMovie(color, idMovie);
 	}
 	
-	@PutMapping("/modify")
+	@PostMapping("/modify")
 	@ResponseBody
 	public Optional<Movie> modifyMovie(@RequestBody Movie movie) {
 		return movieService.postTitleYearDurationDirector(movie);
