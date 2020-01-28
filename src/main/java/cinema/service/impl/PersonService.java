@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.enumeration.Nationalities;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IPersonService;
@@ -50,11 +51,33 @@ public class PersonService implements IPersonService {
 	}
 	
 	@Override
+	public Set<Person> findByNationalities(Nationalities nationalities) {
+		
+		return personRepository.findByNationalities(nationalities);
+	}
+
+	@Override
+	public Set<Person> findByAge(int age) {
+		return personRepository.findByAge(age);
+	}
+
+//	@Override
+//	public Set<Person> FindByAgeBetween(int age1, int age2) {
+//		return personRepository.FindByAgeBetween(age1, age2);
+//	}
+
+//	@Override
+//	public Set<Person> FindByAgeGreaterThan(int age) {
+//		return personRepository.FindByAgeGreaterThan(age);
+//	}
+//	
+	@Override
 	public Person postPerson(Person person) {
 		Person personSaved = personRepository.save(person);
 		personRepository.flush();
 		return personSaved;
 	}
+	
 
 	@Override
 	public Optional<Person> postNameBirthdate(Person person) {
@@ -76,4 +99,5 @@ public class PersonService implements IPersonService {
 		});
 		return personToDelete;
 	}
+
 }

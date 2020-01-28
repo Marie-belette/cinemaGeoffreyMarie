@@ -45,10 +45,15 @@ import cinema.enumeration.Nationalities;
 			this.name = name;
 			this.birthdate = birthdate;
 		}
+		
+		public Person(String name, LocalDate birthdate, int age, Nationalities nationalities, String biography) {
+			this(null, name, birthdate,age,nationalities,biography);	
+		}
 
-		public Person(Integer idPerson, String name, LocalDate birthdate, int age, Nationalities nationalities) {
+		public Person(String name, LocalDate birthdate, int age, Nationalities nationalities) {
 			this(null, name, birthdate,age,nationalities,null);	
 		}
+		
 		
 		public Person(String name, LocalDate birthdate, int age, String biography) {
 			this(null,name, birthdate,age,null,biography);	

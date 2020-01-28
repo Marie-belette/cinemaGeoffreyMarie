@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import cinema.enumeration.Nationalities;
 import cinema.persistence.entity.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Integer> {
@@ -20,4 +21,13 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	
 	@Query("select p from Person p where extract(year from p.birthdate) > ?1")
 	Set<Person>findByBithdateYearGreaterThan(int year);
+	
+	Set<Person>findByNationalities(Nationalities nationalities);
+	
+	Set<Person>findByAge(int age);
+//	
+//	Set<Person>FindByAgeBetween(int age1, int age2);
+	
+//	Set<Person>FindByAgeGreaterThan(int age);
+	
 }

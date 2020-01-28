@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import cinema.enumeration.Nationalities;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.MovieRepository;
@@ -33,17 +34,18 @@ class TestMappingEntities {
 	@Rollback(false)
 	@Test
 	void testSaveData() {
-		var joaq = new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28));
-		var gege = new Person ("Gérard Darmon", LocalDate.of(1948,  2, 29));
-		var todd = new Person ("Todd Phillips", LocalDate.of(1970, 12, 20));
-		var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));
-		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5));
-		var bong = new Person ("Bong Joon-Ho", LocalDate.of(1969, 9, 14));
-		var nolan = new Person ("Christopher Nolan", LocalDate.of(1970, 7, 30));
-		var gene = new Person ("Gene Hackman", LocalDate.of(1930, 1, 30));
-		var morgan = new Person ("Morgan Freeman", LocalDate.of(1937,6,1));
-		var persons = List.of(joaq, gege, todd, clint, brad, bong, nolan, gene, morgan);
-		persons.forEach(repoPersons::save);		
+		
+				var joaq = new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28), 46, Nationalities.ETATS_UNIEN,"je s'appelle groot");
+				var gege = new Person ("Gérard Darmon", LocalDate.of(1948,  2, 29),71, Nationalities.FRANCAIS,"je s'appelle graat");
+				var todd = new Person ("Todd Phillips", LocalDate.of(1970, 12, 20),29,Nationalities.ETATS_UNIEN,"blalbla");
+				var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31),89,Nationalities.ETATS_UNIEN,"bonjoour");
+				var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5),45,Nationalities.ETATS_UNIEN);
+				var bong = new Person ("Bong Joon-Ho", LocalDate.of(1969, 9, 14),50,Nationalities.CORÉEN);
+				var nolan = new Person ("Christopher Nolan", LocalDate.of(1970, 7, 30),49,Nationalities.ANGLAIS);
+				var gene = new Person ("Gene Hackman", LocalDate.of(1930, 1, 30),89,Nationalities.ETATS_UNIEN);
+				var morgan = new Person ("Morgan Freeman", LocalDate.of(1937,6,1),Nationalities.ETATS_UNIEN);
+				var persons = List.of(joaq, gege, todd, clint, brad, bong, nolan, gene, morgan);
+				persons.forEach(repoPersons::save);	
 		var joker = new Movie ("Joker", 2019, 165, todd);
 		var parasite = new Movie ("Parasite", 2019, 132, bong);
 		var interstellar = new Movie ("Interstellar", 2014, nolan);

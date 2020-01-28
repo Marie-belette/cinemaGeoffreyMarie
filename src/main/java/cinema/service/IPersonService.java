@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-
-
+import cinema.enumeration.Nationalities;
 import cinema.persistence.entity.Person;
 
 public interface IPersonService {
@@ -16,6 +15,10 @@ public interface IPersonService {
 	Set<Person>findByBirthdateYearBetween(int year, int years);
 	Set<Person>findByBithdateYearGreaterThan(int year);
 	Set<Person>findByName(String name);
+	Set<Person>findByNationalities(Nationalities nationalities);
+	Set<Person>findByAge(int age);
+//	Set<Person>FindByAgeBetween(int age1, int age2);
+//	Set<Person>FindByAgeGreaterThan(int age);
 	Person postPerson(Person person);
 	Optional<Person> postNameBirthdate (Person person);
 	Optional<Person> deletePerson(int idPerson);

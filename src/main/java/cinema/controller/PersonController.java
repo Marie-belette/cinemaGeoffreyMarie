@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinema.enumeration.Nationalities;
 import cinema.persistence.entity.Person;
 import cinema.service.IPersonService;
+
 
 @RestController
 @RequestMapping("/api/person")
@@ -62,6 +64,30 @@ public class PersonController {
 		return personService.findByBithdateYearGreaterThan(year);
 	}
 	
+	@GetMapping("/nationalities")
+	@ResponseBody
+	public Set<Person>findByNationalities(@RequestParam ("n")Nationalities nationalities) {
+		return personService.findByNationalities(nationalities);
+	}
+	
+	@GetMapping("/age")
+	@ResponseBody
+	public Set<Person>FindByAge(@RequestParam ("a") int age){
+		return personService.findByAge(age);
+	}
+	
+//	@GetMapping("/ageBetween")
+//	@ResponseBody
+//	public Set<Person>FindByAgeBetween(@RequestParam ("a1") int age1, @RequestParam("a2") int age2){
+//		return personService.FindByAgeBetween(age1, age2);
+//	}
+
+//	@GetMapping("/ageGreaterThan")
+//	@ResponseBody
+//	public Set<Person>FindByAgeGreaterThan(@RequestParam ("a") int age){
+//		return personService.FindByAgeGreaterThan(age);
+//	}
+//	
 	@PostMapping ("/addPerson")
 	@ResponseBody
 	public Person addPerson(@RequestBody Person person) {
