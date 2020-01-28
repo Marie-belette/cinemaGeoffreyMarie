@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.enumeration.Classification;
+import cinema.enumeration.Color;
+import cinema.enumeration.Format;
+import cinema.enumeration.Rating;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
@@ -70,6 +74,41 @@ public class MovieService implements IMovieService {
 	public Set<Movie> getMovieByDirectorName(String directorName) {
 		return movieRepository.findByDirectorName(directorName);
 	}
+	
+	@Override
+	public Set<Movie> getMovieByOriginalTitle(String originalTitle) {
+		return movieRepository.findByOriginalTitleContainingIgnoreCase(originalTitle);
+	}
+
+	@Override
+	public Set<Movie> getMovieByGenre(String genre) {
+		return movieRepository.findByGenreContainingIgnoreCase(genre);
+	}
+
+	@Override
+	public Set<Movie> getMovieByRatingGreaterThan(int rating) {
+		return movieRepository.findByRatingGreaterThan(rating);
+	}
+
+	@Override
+	public Set<Movie> getMovieByFormat(Format format) {
+		return movieRepository.findByFormat(format);
+	}
+
+	@Override
+	public Set<Movie> getMovieByClassificationLessThan(Classification classification) {
+		return movieRepository.findByClassificationLessThan(classification);
+	}
+
+	@Override
+	public Set<Movie> getMovieByColor(Color color) {
+		return movieRepository.findByColor(color);
+	}
+
+	@Override
+	public Set<Movie> getMovieBySynopsis(String synopsis) {
+		return movieRepository.findBySynopsisContainingIgnoreCase(synopsis);
+	}
 
 	@Override
 	public Movie postMovie(Movie movie) {
@@ -112,6 +151,51 @@ public class MovieService implements IMovieService {
 		movieRepository.flush();
 		return optMovie;
 	}
+	
+	@Override
+	public Optional<Movie> postGenreMovie(String genre, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setGenre(genre);
+		});
+		return movieOpt;
+	}
+	
+	@Override
+	public Optional<Movie> postRatingMovie(Rating rating, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setRating(rating);
+		});
+		return movieOpt;
+	}
+	
+	@Override
+	public Optional<Movie> postClassificationMovie(Classification classification, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setClassification(classification);
+		});
+		return movieOpt;
+	}
+	
+	@Override
+	public Optional<Movie> postSynopsisMovie(String synopsis, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setSynopsis(synopsis);
+		});
+		return movieOpt;
+	}
+	
+	@Override
+	public Optional<Movie> postColorMovie(Color color, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setColor(color);
+		});
+		return movieOpt;
+	}
 
 	@Override
 	public Optional <Movie> deleteMovie(int idMovie) {
@@ -122,5 +206,4 @@ public class MovieService implements IMovieService {
 		});
 		return movieToDelete;
 	}
-	
 }

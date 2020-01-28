@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import cinema.enumeration.Classification;
+import cinema.enumeration.Color;
+import cinema.enumeration.Format;
+import cinema.enumeration.Rating;
 import cinema.persistence.entity.Movie;
 
 public interface IMovieService {
@@ -23,4 +27,16 @@ public interface IMovieService {
 	Optional<Movie> postDirectorMovie (int idDirector, int idMovie);
 	Optional<Movie> postTitleYearDurationDirector(Movie movie) ;
 	Optional <Movie> deleteMovie (int idMovie);
+	Set<Movie> getMovieByOriginalTitle(String originalTitle);
+	Set<Movie> getMovieByGenre(String genre);
+	Set<Movie> getMovieByRatingGreaterThan(int rating);
+	Set<Movie> getMovieByFormat(Format format);
+	Set<Movie> getMovieByClassificationLessThan(Classification classification);
+	Set<Movie> getMovieByColor(Color color);
+	Set<Movie> getMovieBySynopsis(String synopsis);
+	Optional<Movie> postGenreMovie(String genre, int idMovie);
+	Optional<Movie> postRatingMovie(Rating rating, int idMovie);
+	Optional<Movie> postClassificationMovie(Classification classification, int idMovie);
+	Optional<Movie> postSynopsisMovie(String synopsis, int idMovie);
+	Optional<Movie> postColorMovie(Color color, int idMovie);
 }

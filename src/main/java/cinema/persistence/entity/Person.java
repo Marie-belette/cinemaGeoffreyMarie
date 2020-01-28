@@ -22,8 +22,8 @@ import cinema.enumeration.Nationalities;
 		private String name;
 		private LocalDate birthdate;
 		private Nationalities nationalities;
-		private Integer age;
 		private String biography;
+		private int age;
 		
 		public Person() {
 			super();
