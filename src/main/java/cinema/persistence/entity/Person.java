@@ -23,19 +23,18 @@ import cinema.enumeration.Nationalities;
 		private LocalDate birthdate;
 		private Nationalities nationalities;
 		private String biography;
-		private int age;
+
 		
 		public Person() {
 			super();
 		}
 
-		public Person(Integer idPerson, String name, LocalDate birthdate, int age, Nationalities nationalities,
+		public Person(Integer idPerson, String name, LocalDate birthdate, Nationalities nationalities,
 				String biography) {
 			super();
 			this.idPerson = idPerson;
 			this.name = name;
 			this.birthdate = birthdate;
-			this.age = age;
 			this.nationalities = nationalities;
 			this.biography = biography;
 		}
@@ -46,22 +45,14 @@ import cinema.enumeration.Nationalities;
 			this.birthdate = birthdate;
 		}
 		
-		public Person(String name, LocalDate birthdate, int age, Nationalities nationalities, String biography) {
-			this(null, name, birthdate,age,nationalities,biography);	
-		}
-
-		public Person(String name, LocalDate birthdate, int age, Nationalities nationalities) {
-			this(null, name, birthdate,age,nationalities,null);	
+		public Person(String name, LocalDate birthdate, Nationalities nationalities, String biography) {
+			this(null, name, birthdate,nationalities,biography);	
 		}
 		
-		
-		public Person(String name, LocalDate birthdate, int age, String biography) {
-			this(null,name, birthdate,age,null,biography);	
+		public Person(String name, LocalDate birthdate, String biography) {
+			this(null,name, birthdate,null,biography);	
 		}
 		
-		public Person(String name, LocalDate birthdate, int age) {
-			this(null, name, birthdate,age,null,null);	
-		}
 		
 		public Person(String name) {
 			this();	
@@ -103,23 +94,7 @@ import cinema.enumeration.Nationalities;
 			this.birthdate = birthdate;
 		}
 
-		@Column(name = "age")
-		public int getAge() {
-			LocalDate todayFull = LocalDate.now();
-			MonthDay birthday = MonthDay.of(
-					birthdate.getMonthValue(), 
-					birthdate.getDayOfMonth());
-			MonthDay today = MonthDay.now();		
-			int age = todayFull.getYear() - birthdate.getYear();
-			if (today.compareTo(birthday) < 0) {
-				-- age;
-			}
-			return age;
-		}
 
-		public void setAge(int age) {
-			this.age = age;
-		}
 
 		public Nationalities getNationalities() {
 			return nationalities;

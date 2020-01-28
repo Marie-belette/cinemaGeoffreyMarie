@@ -70,11 +70,11 @@ public class PersonController {
 		return personService.findByNationalities(nationalities);
 	}
 	
-	@GetMapping("/age")
-	@ResponseBody
-	public Set<Person>FindByAge(@RequestParam ("a") int age){
-		return personService.findByAge(age);
-	}
+//	@GetMapping("/age")
+//	@ResponseBody
+//	public Set<Person>FindByAge(@RequestParam ("a") int age){
+//		return personService.findByAge(age);
+//	}
 	
 //	@GetMapping("/ageBetween")
 //	@ResponseBody

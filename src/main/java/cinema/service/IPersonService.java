@@ -16,7 +16,7 @@ public interface IPersonService {
 	Set<Person>findByBithdateYearGreaterThan(int year);
 	Set<Person>findByName(String name);
 	Set<Person>findByNationalities(Nationalities nationalities);
-	Set<Person>findByAge(int age);
+//	Set<Person>findByAge(int age);
 //	Set<Person>FindByAgeBetween(int age1, int age2);
 //	Set<Person>FindByAgeGreaterThan(int age);
 	Person postPerson(Person person);

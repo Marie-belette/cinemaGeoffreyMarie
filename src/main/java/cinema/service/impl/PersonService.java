@@ -56,10 +56,10 @@ public class PersonService implements IPersonService {
 		return personRepository.findByNationalities(nationalities);
 	}
 
-	@Override
-	public Set<Person> findByAge(int age) {
-		return personRepository.findByAge(age);
-	}
+//	@Override
+//	public Set<Person> findByAge(int age) {
+//		return personRepository.findByAge(age);
+//	}
 
 //	@Override
 //	public Set<Person> FindByAgeBetween(int age1, int age2) {
