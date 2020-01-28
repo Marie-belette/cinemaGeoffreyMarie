@@ -95,12 +95,28 @@ public class PersonController {
 	}
 
 	
+	@PostMapping("/setNationalities")
+	@ResponseBody
+	public Optional<Person> setNationalities(@RequestParam("n") Nationalities nationalities, @RequestParam("id") Integer idPerson )
+	{
+		return personService.postNationalitiesPerson(nationalities, idPerson);
+	}
+	
+	@PutMapping("/setBiography")
+	@ResponseBody
+	public Optional<Person> setBiography(@RequestParam("b") String biography, @RequestParam("id") Integer idPerson )
+	{
+		return personService.postBiographyPerson(biography, idPerson);
+	}
+	
 	@PutMapping("/modify")
 	@ResponseBody
 	public Optional<Person> modifyPerson (@RequestBody Person person ) {
 		return personService.postNameBirthdate(person);
 
 	}
+	
+	
 	
 	@DeleteMapping("/{id}")
 	@ResponseBody

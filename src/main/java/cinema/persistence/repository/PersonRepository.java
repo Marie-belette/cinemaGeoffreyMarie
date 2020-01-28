@@ -24,6 +24,8 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	
 	Set<Person>findByNationalities(Nationalities nationalities);
 	
+	Set<Person>findByBiographyContaining(String biography);
+	
 //	Set<Person>findByAge(int age);
 //	
 //	Set<Person>FindByAgeBetween(int age1, int age2);
