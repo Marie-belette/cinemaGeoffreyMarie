@@ -1,7 +1,6 @@
 package cinema.persistence.entity;
 
 import java.time.LocalDate;
-import java.time.MonthDay;
 import java.util.Objects;
 
 
@@ -63,7 +62,6 @@ import cinema.enumeration.Nationalities;
 			this.name = name;
 			this.birthdate = birthdate;
 			this.nationalities = nationalities;
-			
 		}
 		
 		@Id
@@ -93,8 +91,6 @@ import cinema.enumeration.Nationalities;
 		public void setBirthdate(LocalDate birthdate) {
 			this.birthdate = birthdate;
 		}
-
-
 
 		public Nationalities getNationalities() {
 			return nationalities;

@@ -136,7 +136,6 @@ public class MovieController {
 	@ResponseBody
 	public Optional<Movie> addActor(@RequestParam("a") int idActor, @RequestParam("m") int idMovie) {		
 		return movieService.postActorMovie(idActor, idMovie);
-
 	}
 	
 	@PutMapping("/setDirector")

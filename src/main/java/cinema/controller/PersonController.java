@@ -46,6 +46,12 @@ public class PersonController {
 		return personService.findByNameContainingIgnoreCase(name);
 	}
 	
+	@GetMapping("/biography")
+	@ResponseBody
+	public Set<Person> findByBiographyContaining(@RequestParam("bio") String biography) {
+		return personService.findByBiographyContaining(biography);
+	}
+	
 	@GetMapping("/birthdate")
 	@ResponseBody
 	public Set<Person> findByBirthdateYear(@RequestParam("b") int year) {
@@ -66,7 +72,7 @@ public class PersonController {
 	
 	@GetMapping("/nationalities")
 	@ResponseBody
-	public Set<Person>findByNationalities(@RequestParam ("n")Nationalities nationalities) {
+	public Set<Person> findByNationalities(@RequestParam("nat") Nationalities nationalities) {
 		return personService.findByNationalities(nationalities);
 	}
 	
@@ -94,18 +100,15 @@ public class PersonController {
 	return personService.postPerson(person);
 	}
 
-	
 	@PostMapping("/setNationalities")
 	@ResponseBody
-	public Optional<Person> setNationalities(@RequestParam("n") Nationalities nationalities, @RequestParam("id") Integer idPerson )
-	{
+	public Optional<Person> setNationalities(@RequestParam("n") Nationalities nationalities, @RequestParam("p") int idPerson) {
 		return personService.postNationalitiesPerson(nationalities, idPerson);
 	}
 	
-	@PutMapping("/setBiography")
+	@PostMapping("/setBiography")
 	@ResponseBody
-	public Optional<Person> setBiography(@RequestParam("b") String biography, @RequestParam("id") Integer idPerson )
-	{
+	public Optional<Person> setBiography(@RequestParam("b") String biography, @RequestParam("p") int idPerson ) {
 		return personService.postBiographyPerson(biography, idPerson);
 	}
 	
@@ -113,10 +116,7 @@ public class PersonController {
 	@ResponseBody
 	public Optional<Person> modifyPerson (@RequestBody Person person ) {
 		return personService.postNameBirthdate(person);
-
 	}
-	
-	
 	
 	@DeleteMapping("/{id}")
 	@ResponseBody

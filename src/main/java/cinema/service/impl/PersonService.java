@@ -52,15 +52,14 @@ public class PersonService implements IPersonService {
 	
 	@Override
 	public Set<Person> findByNationalities(Nationalities nationalities) {
-		
 		return personRepository.findByNationalities(nationalities);
 	}
 	
 	@Override
 	public Set<Person> findByBiographyContaining(String biography) {
-	
 		return personRepository.findByBiographyContaining(biography);
 	}
+	
 //	@Override
 //	public Set<Person> findByAge(int age) {
 //		return personRepository.findByAge(age);
@@ -75,7 +74,7 @@ public class PersonService implements IPersonService {
 //	public Set<Person> FindByAgeGreaterThan(int age) {
 //		return personRepository.FindByAgeGreaterThan(age);
 //	}
-//	
+	
 	@Override
 	public Person postPerson(Person person) {
 		Person personSaved = personRepository.save(person);
@@ -83,7 +82,6 @@ public class PersonService implements IPersonService {
 		return personSaved;
 	}
 	
-
 	@Override
 	public Optional<Person> postNameBirthdate(Person person) {
 		var optPerson = personRepository.findById(person.getIdPerson());
@@ -97,7 +95,7 @@ public class PersonService implements IPersonService {
 	}
 	
 	@Override
-	public Optional<Person> postNationalitiesPerson(Nationalities nationalities, Integer idPerson){
+	public Optional<Person> postNationalitiesPerson(Nationalities nationalities, int idPerson){
 		var optPerson = personRepository.findById(idPerson);
 			optPerson.ifPresent(p -> {
 			p.setNationalities(nationalities);
@@ -106,7 +104,7 @@ public class PersonService implements IPersonService {
 			return optPerson;
 	}
 	@Override
-	public Optional<Person> postBiographyPerson(String biography, Integer idPerson){
+	public Optional<Person> postBiographyPerson(String biography, int idPerson){
 		var optPerson = personRepository.findById(idPerson);
 			optPerson.ifPresent(p -> {
 			p.setBiography(biography);;

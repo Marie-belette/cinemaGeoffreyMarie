@@ -22,7 +22,7 @@ public interface IPersonService {
 //	Set<Person>FindByAgeGreaterThan(int age);
 	Person postPerson(Person person);
 	Optional<Person> postNameBirthdate (Person person);
-	Optional<Person> postNationalitiesPerson(Nationalities nationalities, Integer idPerson);
-	Optional<Person> postBiographyPerson(String biography, Integer idPerson);
+	Optional<Person> postNationalitiesPerson(Nationalities nationalities, int idPerson);
+	Optional<Person> postBiographyPerson(String biography, int idPerson);
 	Optional<Person> deletePerson(int idPerson);
 }
