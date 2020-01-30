@@ -1,55 +1,107 @@
 package cinema.persistence.entity;
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "act")
+@Table(name= "role")
 public class Role {
 
+	@Id
+	@GeneratedValue
+	private int idRole;
 	private String name;
+	private int idMovie;
+	private int idActors;
+
 	
 	public Role() {
 		super();
 	}
 	
-	public Role(Integer idRole, String name) {
+
+	public Role(int idRole, String name, int idMovie, int idActors) {
 		super();
+		this.idRole = idRole;
 		this.name = name;
+		this.idMovie = idMovie;
+		this.idActors = idActors;
 	}
 
-	@Id
-    RoleID pk;
-    public RoleID getPk() {
-        return pk;
-    }
-    
-    public void setPk(RoleID pk) {
-        this.pk = pk;
-    }
 
+	public Role(String name, int idMovie, int idActors) {
+		super();
+		this.name = name;
+		this.idMovie = idMovie;
+		this.idActors = idActors;
+	}
+
+
+	public int getIdRole() {
+		return idRole;
+	}
+
+	public void setIdRole(int idRole) {
+		this.idRole = idRole;
+	}
+	
+	
+	public int getIdActors() {
+		return idActors;
+	}
+
+
+	public void setIdActors(int idActors) {
+		this.idActors = idActors;
+	}
+
+
+	public int getIdMovie() {
+		return idMovie;
+	}
+
+	public void setIdMovie(int idMovie) {
+		this.idMovie = idMovie;
+	}
+
+	@Column(nullable = false, length = 255)
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	public Movie getMovie() {
-        return getPk().getMovie();
-	}
-
-	public void setFilm(Movie movie) {
-	        getPk().setMovie(movie);
-	}
 	
-	public Person getActor() {
-	        return getPk().getActor();
+	@ManyToOne
+	@JoinColumn(name= "id_movie")
+	
+	public int getMovie() {
+		return idMovie;
 	}
 
-	public void setActor(Person actor) {
-	        getPk().setActor(actor);
+	public void setMovie(int movie) {
+		this.idMovie = movie;
+	}
+
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "id_actor")
+	public int getActors() {
+		return idActors;
+	}
+
+	public void setActors(int actors) {
+		this.idActors = actors;
 	}
 }

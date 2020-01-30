@@ -108,7 +108,6 @@ class TestSixDegreesOfKevinBacon {
 		repoMovies.flush();
 	}
 	
-	@Test
-	void testPersonWithThemselves() {
-	}
+	
+	
 }

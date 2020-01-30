@@ -15,8 +15,10 @@ import org.springframework.test.annotation.Rollback;
 
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.entity.Role;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
+import cinema.persistence.repository.RoleRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -27,6 +29,9 @@ class TestMappingEntities {
 	
 	@Autowired
 	MovieRepository repoMovies;
+	
+	@Autowired
+	RoleRepository repoRole;
 
 	@Rollback(false)
 	@Test
@@ -59,6 +64,21 @@ class TestMappingEntities {
 		var movies = List.of(
 				joker, parasite, interstellar, granTorino, impitoyable, americanSniper, veryBadTrip, avengersInfinityWar, avengersEndGame, avengers, captainMarvel, avengersAgeOfUltron, lesPleinsPouvoirs);
 		movies.forEach(repoMovies::save);
+		
+		
+		var jok = new Role("joker",1,1);
+		var walt = new Role ("Walt Kowalski",4,4);
+		var role = List.of(jok,walt);
+		role.forEach(repoRole::save);
+	}
+	
+	
+	@Rollback(false)
+	@Test
+	void testrole() 
+	{
+		
+		
 	}
 	
 	@Rollback(false)
@@ -112,13 +132,6 @@ class TestMappingEntities {
 		repoMovies.flush();
 	}
 	
-//	@Rollback(false)
-//	@Test
-//	void scenarion08MovieAddActor() {
-//		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
-//		var morgan = repoPersons.findByName("Morgan Freeman").stream().findFirst().get();
-//		impitoyable.getActors().add(morgan);
-//		repoMovies.flush();
-//	}
+	
 }
 
