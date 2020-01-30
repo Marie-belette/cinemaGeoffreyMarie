@@ -5,28 +5,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class RoleID {
+public class RoleID implements java.io.Serializable {
 
+    private Person actor;
+    private Movie movie;
+    
+	private static final long serialVersionUID = 1L;
 
      @ManyToOne
      @JoinColumn(name = "id_actor")
-     private Person actor;
-     public Person getActor() {
-             return actor;
+     public int getActor() {
+    	 return actor.getIdPerson();
      }
 
      public void setActor(Person actor) {
-             this.actor = actor;
+    	 this.actor = actor;
      }
 
      @ManyToOne
      @JoinColumn(name = "id_movie")
-     private Movie movie;
-     public Movie getMovie() {
-             return movie;
+     public int getMovie() {
+    	 return movie.getIdMovie();
      }
 
      public void setMovie(Movie movie) {
-             this.movie = movie;
+    	 this.movie = movie;
      }
 }

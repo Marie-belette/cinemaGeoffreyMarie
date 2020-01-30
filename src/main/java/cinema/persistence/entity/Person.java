@@ -1,6 +1,7 @@
 package cinema.persistence.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -9,9 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+//import org.hibernate.mapping.Set;
 
 import cinema.enumeration.Nationalities;
 
@@ -24,7 +28,6 @@ import cinema.enumeration.Nationalities;
 		private LocalDate birthdate;
 		private Nationalities nationalities;
 		private String biography;
-		private Role role;
 
 		
 		public Person() {
@@ -32,14 +35,13 @@ import cinema.enumeration.Nationalities;
 		}
 
 		public Person(Integer idPerson, String name, LocalDate birthdate, Nationalities nationalities,
-				String biography, Role role) {
+				String biography) {
 			super();
 			this.idPerson = idPerson;
 			this.name = name;
 			this.birthdate = birthdate;
 			this.nationalities = nationalities;
 			this.biography = biography;
-			this.role = role;
 		}
 		
 		public Person(String name, LocalDate birthdate) {
@@ -49,17 +51,27 @@ import cinema.enumeration.Nationalities;
 		}
 		
 		public Person(String name, LocalDate birthdate, Nationalities nationalities, String biography) {
-			this(null, name, birthdate,nationalities,biography, null);	
+			this(null, name, birthdate,nationalities,biography);	
 		}
 		
 		public Person(String name, LocalDate birthdate, String biography) {
-			this(null,name, birthdate,null,biography, null);	
+			this(null,name, birthdate,null,biography);	
 		}
 		
-		@OneToMany
-		@JoinColumn(name="id_role", nullable=true)
-		public Role getRole() {
-			return role;
+		@OneToMany(mappedBy = "pk.acteur")
+		private ArrayList<Role> roles = new ArrayList<Role>();
+		public ArrayList<Role> getRoles() {
+		        return this.roles;
+		}
+		
+		public void setRoles(ArrayList<Role> r) {
+		        this.roles = r;
+		}
+		
+		@ManyToMany(mappedBy = "actors")
+		ArrayList<Movie> filmo;
+		public ArrayList<Movie> getFilmo() {
+		        return filmo;
 		}
 		
 		public Person(String name) {

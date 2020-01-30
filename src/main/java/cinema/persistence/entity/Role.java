@@ -1,26 +1,17 @@
 package cinema.persistence.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "act")
 public class Role {
 
 	private String name;
+	private RoleID pk;
+	   
 	
-	public Role() {
-		super();
-	}
-	
-	public Role(Integer idRole, String name) {
-		super();
-		this.name = name;
-	}
-
 	@Id
-    RoleID pk;
     public RoleID getPk() {
         return pk;
     }
@@ -29,27 +20,26 @@ public class Role {
         this.pk = pk;
     }
 
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public Movie getMovie() {
+    @Column(name="name_role")
+    public String getName() {return name;}
+    
+    public void setName(String n) {name= n;}
+    
+    
+    public int getMovie() {
         return getPk().getMovie();
-	}
+    }
 
-	public void setFilm(Movie movie) {
-	        getPk().setMovie(movie);
-	}
-	
-	public Person getActor() {
-	        return getPk().getActor();
-	}
+    public void setMovie(Movie movie) {
+        getPk().setMovie(movie);
+    }
 
-	public void setActor(Person actor) {
-	        getPk().setActor(actor);
-	}
+    	@Column(name="played_by")
+    public int getActor() {
+        return getPk().getActor();
+    }
+
+    public void setActor(Person actor) {
+        getPk().setActor(actor);
+    }
 }

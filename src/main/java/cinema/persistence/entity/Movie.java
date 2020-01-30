@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+//import javax.persistence.JoinTable;
+//import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import cinema.enumeration.Classification;
@@ -37,6 +40,7 @@ public class Movie {
 	private Classification classification;
 	private String synopsis;
 	private Color color;
+	private List<Role> roles;
 	
 	//@Transient
 	// private String director; Ce sont les attributs qui ne sont pas "persistent", donc qui ne seront pas sauvegardés (côté Database)
@@ -55,6 +59,7 @@ public class Movie {
 		this.duration = duration;
 		this.director = director;
 		this.actors = new ArrayList<>();
+		this.roles = new ArrayList<>();
 		this.genre = genre;
 		this.rating = rating;
 		this.format = format;
@@ -185,12 +190,22 @@ public class Movie {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+	
+	@OneToMany(mappedBy = "pk.movie")
+	public List<Role> getRoles() {
+	        return this.roles;
+	}
+	
+	public void setRoles(ArrayList<Role> r) {
+	        this.roles = r;
+	}
 
 	@ManyToMany //(fetch = FetchType.EAGER)
 	@JoinTable(name="act",
-        joinColumns=@JoinColumn(name="id_movie"),
-        inverseJoinColumns=@JoinColumn(name="id_actor")
-        )
+  joinColumns=@JoinColumn(name="id_movie"),
+  inverseJoinColumns=@JoinColumn(name="id_actor")
+  )
+	@Column(name="actors")
 	public List<Person> getActors() {
 		return actors;
 	}

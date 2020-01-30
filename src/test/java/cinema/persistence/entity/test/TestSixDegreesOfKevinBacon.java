@@ -1,6 +1,7 @@
 package cinema.persistence.entity.test;
 
 import java.time.LocalDate;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -108,7 +109,18 @@ class TestSixDegreesOfKevinBacon {
 		repoMovies.flush();
 	}
 	
-	@Test
-	void testPersonWithThemselves() {
-	}
+//	@Test
+//	void essaiMarieListCoworkers() {
+//		Person clint = repoPersons.findByName("Clint Eastwood").stream().findFirst().get();
+//		Person joaq = repoPersons.findByName("Joaquin Phoenix").stream().findFirst().get();
+//		var filmsClint = repoMovies.findByDirector(clint);
+//		ArrayList<Person> clintCoworkers = new ArrayList<Person>();
+//        filmsClint.stream() 
+//        		.map(m -> m.getActors())
+//                .forEach(clintCoworkers::add); 
+//        clintCoworkers.stream()
+//        .equals(joaq);
+//		}
+
+	
 }

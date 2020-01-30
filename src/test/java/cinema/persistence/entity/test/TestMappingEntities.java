@@ -4,6 +4,7 @@ package cinema.persistence.entity.test;
  */
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -108,7 +109,7 @@ class TestMappingEntities {
 		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
 		var clint = repoPersons.findByName("Clint Eastwood").stream().findFirst().get();
 		var gene = repoPersons.findByName("Gene Hackman").stream().findFirst().get();
-		impitoyable.setActors(List.of(clint, gene));
+		impitoyable.setActors((ArrayList<Person>) List.of(clint, gene));
 		repoMovies.flush();
 	}
 	
