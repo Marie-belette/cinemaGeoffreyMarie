@@ -114,13 +114,13 @@ class TestMappingEntities {
 		repoMovies.flush();
 	}
 	
-//	@Rollback(false)
-//	@Test
-//	void scenarion08MovieAddActor() {
-//		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
-//		var morgan = repoPersons.findByName("Morgan Freeman").stream().findFirst().get();
-//		impitoyable.getActors().add(morgan);
-//		repoMovies.flush();
-//	}
+	@Rollback(false)
+	@Test
+	void scenarion08MovieAddActor() {
+		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
+		var morgan = repoPersons.findByName("Morgan Freeman").stream().findFirst().get();
+		impitoyable.getActors().add(morgan);
+		repoMovies.flush();
+	}
 }
 

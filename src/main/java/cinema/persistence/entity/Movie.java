@@ -3,7 +3,9 @@ package cinema.persistence.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +34,7 @@ public class Movie {
 	private List<Person> actors;
 	private String originalTitle;
 	private Rating rating ;
-	private String genre;
+	private List<String> genres;
 	private Format format;
 	private Classification classification;
 	private String synopsis;
@@ -45,7 +47,7 @@ public class Movie {
 		super();
 	}
 
-	public Movie(Integer idMovie, String title, String originalTitle, Integer year, Integer duration, Person director, String genre, 
+	public Movie(Integer idMovie, String title, String originalTitle, Integer year, Integer duration, Person director, List <String> genres, 
 			Rating rating, Format format, Classification classification, String synopsis, Color color) {
 		super();
 		this.idMovie = idMovie;
@@ -55,7 +57,7 @@ public class Movie {
 		this.duration = duration;
 		this.director = director;
 		this.actors = new ArrayList<>();
-		this.genre = genre;
+		this.genres = genres;
 		this.rating = rating;
 		this.format = format;
 		this.classification = classification;
@@ -146,12 +148,14 @@ public class Movie {
 		this.rating = rating;
 	}
 
-	public String getGenre() {
-		return genre;
+	@ElementCollection
+	@CollectionTable(joinColumns = @JoinColumn(name = "id_movie"))
+	public List<String> getGenres() {
+		return genres;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setGenre(List<String> genres) {
+		this.genres = genres;
 	}
 
 	public Format getFormat() {
