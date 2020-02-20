@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import cinema.enumeration.Classification;
 import cinema.enumeration.Color;
 import cinema.enumeration.Format;
 import cinema.enumeration.Rating;
+import cinema.exception.MovieNotFoundException;
 import cinema.service.IMovieService;
 
 @RestController
@@ -31,18 +33,25 @@ public class MovieController {
 	@Autowired
 	IMovieService movieService;
 	
+	@CrossOrigin
 	@GetMapping
 	@ResponseBody
 	public List<SimpleMovie> allMovies() {
 		return movieService.getAllMovies();
 	}
 	
+	@CrossOrigin
 	@GetMapping("/{id}")
 	@ResponseBody
 	public Optional<MovieFull> movieById(@PathVariable("id")int idMovie) {
-		return movieService.getMovieById(idMovie);
+		Optional<MovieFull> movieFull = movieService.getMovieById(idMovie);
+		if (movieFull.isPresent() ) {
+		return movieFull;
+		}
+		throw new MovieNotFoundException();
 	}
 	
+	@CrossOrigin
 	@GetMapping("/byTitle")
 	@ResponseBody
 	public Set<SimpleMovie> movieByPartialTitle(@RequestParam("t") String partialTitle) {
@@ -153,7 +162,7 @@ public class MovieController {
 	
 	@PostMapping("/setGenre")
 	@ResponseBody
-	public Optional<MovieFull> setGenre(@RequestParam("g") String genre, @RequestParam("m") int idMovie) {		
+	public Optional<MovieFull> setGenre(@RequestParam("g") List<String> genre, @RequestParam("m") int idMovie) {		
 		return movieService.postGenreMovie(genre, idMovie);
 	}
 	
@@ -181,12 +190,14 @@ public class MovieController {
 		return movieService.postColorMovie(color, idMovie);
 	}
 	
+	@CrossOrigin
 	@PostMapping("/modify")
 	@ResponseBody
 	public Optional<MovieFull> modifyMovie(@RequestBody MovieFull movie) {
 		return movieService.postTitleYearDurationDirector(movie);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	public Optional<MovieFull> deleteMovie(@PathVariable("id") int idMovie) {

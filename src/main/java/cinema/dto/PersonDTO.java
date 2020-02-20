@@ -5,20 +5,12 @@ import java.time.MonthDay;
 import java.util.Objects;
 import java.util.OptionalInt;
 
-public class Person {
+public class PersonDTO {
+	
+	private Integer idPerson;
 	private String name;
 	private LocalDate birthdate;
 	
-	
-	public Person(String name, LocalDate birthdate) {
-		super();
-		this.name = name;
-		this.birthdate = birthdate;
-	}
-
-	public Person(String name) {
-		this(name, null);
-	}
 
 	public String getName() {
 		return name;
@@ -57,6 +49,14 @@ public class Person {
 		return OptionalInt.of(deltaYear);
 		
 		// TODO equals + hashCode
+	}
+
+	public Integer getIdPerson() {
+		return idPerson;
+	}
+
+	public void setIdPerson(Integer idPerson) {
+		this.idPerson = idPerson;
 	}
 }
 

@@ -18,6 +18,7 @@ import cinema.enumeration.Color;
 import cinema.enumeration.Format;
 import cinema.enumeration.Rating;
 import cinema.persistence.entity.Movie;
+import cinema.persistence.entity.Person;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IMovieService;
@@ -165,14 +166,13 @@ public class MovieService implements IMovieService {
 
 	@Override
 	public Optional<MovieFull> postActorMovie(int idActor, int idMovie) {
-		var movieOpt = movieRepository.findById(idMovie);
-		var actorOpt = personRepository.findById(idActor);
-		if (movieOpt.isPresent() && actorOpt.isPresent()) {
-				movieOpt.get().getActors().add(actorOpt.get());
-				movieRepository.flush();
-		}
-		return movieOpt
-				.map(me -> mapper.map(me, MovieFull.class));
+		return movieRepository.findById(idMovie)
+			.flatMap((Movie me) -> personRepository.findById(idActor)
+					.map((Person a) -> { 
+						me.getActors().add(a);
+						return mapper.map(me, MovieFull.class);
+					}));
+
 	}
 
 	@Override
@@ -194,7 +194,14 @@ public class MovieService implements IMovieService {
 			m.setTitle(movie.getTitle());
 			m.setYear(movie.getYear());
 			m.setDuration(movie.getDuration());
-			m.setDirector(movie.getDirector());
+			m.setSynopsis(movie.getSynopsis());
+			m.setGenre(movie.getGenres());
+			m.setOriginalTitle(movie.getOriginalTitle());
+			m.setRating(movie.getRating());
+			m.setFormat(movie.getFormat());
+			m.setClassification(movie.getClassification());
+			m.setColor(movie.getColor());
+//			m.setDirector(movie.getDirector());
 		});
 		movieRepository.flush();
 		return optMovie
@@ -202,121 +209,81 @@ public class MovieService implements IMovieService {
 	}
 
 	@Override
-	public Optional<MovieFull> postGenreMovie(String genre, int idMovie) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<MovieFull> postGenreMovie(List<String> genre, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setGenre(genre);
+		});
+		return movieOpt
+				.map(me -> mapper.map(me, MovieFull.class));
 	}
 
 	@Override
 	public Optional<MovieFull> postRatingMovie(Rating rating, int idMovie) {
-		// TODO Auto-generated method stub
-		return null;
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setRating(rating);
+		});
+		return movieOpt
+				.map(me -> mapper.map(me, MovieFull.class));
 	}
 
 	@Override
 	public Optional<MovieFull> postClassificationMovie(Classification classification, int idMovie) {
-		// TODO Auto-generated method stub
-		return null;
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setClassification(classification);
+		});
+		return movieOpt
+				.map(me -> mapper.map(me, MovieFull.class));
 	}
 
 	@Override
 	public Optional<MovieFull> postSynopsisMovie(String synopsis, int idMovie) {
-		// TODO Auto-generated method stub
-		return null;
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setSynopsis(synopsis);
+		});
+		return movieOpt
+				.map(me -> mapper.map(me, MovieFull.class));
 	}
 
 	@Override
 	public Optional<MovieFull> postColorMovie(Color color, int idMovie) {
-		// TODO Auto-generated method stub
-		return null;
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setColor(color);
+		});
+		return movieOpt
+				.map(me -> mapper.map(me, MovieFull.class));
 	}
 
 	@Override
 	public Optional<MovieFull> postOriginalTitleMovie(String originalTitle, int idMovie) {
-		// TODO Auto-generated method stub
-		return null;
+		var movieOpt = movieRepository.findById(idMovie);
+		movieOpt.ifPresent (m -> {
+		m.setOriginalTitle(originalTitle);
+		});
+		return movieOpt
+				.map(me -> mapper.map(me, MovieFull.class));
 	}
 
 	@Override
-	public MovieFull addMovie(MovieFull movie) {
-		// TODO Auto-generated method stub
-		return null;
+	public MovieFull addMovie(MovieFull movieDTO) {
+		Movie movieEntity = mapper.map(movieDTO, Movie.class);
+		movieRepository.save(movieEntity);
+		mapper.map(movieEntity, movieDTO);
+		return movieDTO;
 	}
 
 	@Override
 	public Optional<MovieFull> deleteMovie(int idMovie) {
-		// TODO Auto-generated method stub
-		return null;
+		var movieToDelete = movieRepository.findById(idMovie);
+		movieToDelete.ifPresent(m -> { 
+			movieRepository.delete(m);
+			movieRepository.flush();
+		});
+		return movieToDelete
+				.map(me -> mapper.map(me, MovieFull.class));
 	}
-
-//	@Override
-//	public MovieFull addMovie(MovieFull movie) {
-//		Movie movieSaved = movieRepository.save(movie);
-//		movieRepository.flush();
-//		return movieSaved;
-//	}
-
-//	@Override
-//	public Optional<MovieFull> postGenreMovie(String genre, int idMovie) {
-//		var movieOpt = movieRepository.findById(idMovie);
-//		movieOpt.ifPresent (m -> {
-//		m.setGenre(genre);
-//		});
-//		return movieOpt;
-//	}
-//	
-//	@Override
-//	public Optional<MovieFull> postRatingMovie(Rating rating, int idMovie) {
-//		var movieOpt = movieRepository.findById(idMovie);
-//		movieOpt.ifPresent (m -> {
-//		m.setRating(rating);
-//		});
-//		return movieOpt;
-//	}
-//	
-//	@Override
-//	public Optional<MovieFull> postClassificationMovie(Classification classification, int idMovie) {
-//		var movieOpt = movieRepository.findById(idMovie);
-//		movieOpt.ifPresent (m -> {
-//		m.setClassification(classification);
-//		});
-//		return movieOpt;
-//	}
-//	
-//	@Override
-//	public Optional<MovieFull> postSynopsisMovie(String synopsis, int idMovie) {
-//		var movieOpt = movieRepository.findById(idMovie);
-//		movieOpt.ifPresent (m -> {
-//		m.setSynopsis(synopsis);
-//		});
-//		return movieOpt;
-//	}
-//	
-//	@Override
-//	public Optional<MovieFull> postColorMovie(Color color, int idMovie) {
-//		var movieOpt = movieRepository.findById(idMovie);
-//		movieOpt.ifPresent (m -> {
-//		m.setColor(color);
-//		});
-//		return movieOpt;
-//	}
-//
-//	@Override
-//	public Optional<MovieFull> deleteMovie(int idMovie) {
-//		var movieToDelete = movieRepository.findById(idMovie);
-//		movieToDelete.ifPresent(m -> { 
-//			movieRepository.delete(m);
-//			movieRepository.flush();
-//		});
-//		return movieToDelete;
-//	}
-//
-//	@Override
-//	public Optional<MovieFull> postOriginalTitleMovie(String originalTitle, int idMovie) {
-//		var movieOpt = movieRepository.findById(idMovie);
-//		movieOpt.ifPresent (m -> {
-//		m.setOriginalTitle(originalTitle);
-//		});
-//		return movieOpt;
-//	}
 }

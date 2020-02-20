@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinema.dto.PersonDTO;
 import cinema.enumeration.Nationalities;
-import cinema.persistence.entity.Person;
 import cinema.service.IPersonService;
 
 
@@ -28,51 +28,61 @@ public class PersonController {
 	@Autowired
 	IPersonService personService;
 	
+	@GetMapping("/directorByMovie/{idM}")
+	Optional<PersonDTO> getMovieDirector(@PathVariable("idM") Integer idMovie) {
+		return personService.getMovieDirector(idMovie);
+	}
+	
+	@GetMapping("/actorsByMovie/{idM}")
+	List<PersonDTO> getMovieActors(@PathVariable("idM") Integer idMovie){
+		return personService.getMovieActors(idMovie);
+	}
+	
 	@GetMapping
 	@ResponseBody
-	public List<Person> allPersons() {
+	public List<PersonDTO> allPersons() {
 		return personService.getAllPersons();
 	}
 	
 	@GetMapping("/name")
 	@ResponseBody
-	public Set<Person> findByName(@RequestParam("n")String name) {
+	public Set<PersonDTO> findByName(@RequestParam("n")String name) {
 		return personService.findByName(name);
 		}
 	
 	@GetMapping("/nameIgnore")
 	@ResponseBody
-	public Set<Person> findByNameContainingIgnoreCase(@RequestParam("n") String name) {
+	public Set<PersonDTO> findByNameContainingIgnoreCase(@RequestParam("n") String name) {
 		return personService.findByNameContainingIgnoreCase(name);
 	}
 	
 	@GetMapping("/biography")
 	@ResponseBody
-	public Set<Person> findByBiographyContaining(@RequestParam("bio") String biography) {
+	public Set<PersonDTO> findByBiographyContaining(@RequestParam("bio") String biography) {
 		return personService.findByBiographyContaining(biography);
 	}
 	
 	@GetMapping("/birthdate")
 	@ResponseBody
-	public Set<Person> findByBirthdateYear(@RequestParam("b") int year) {
+	public Set<PersonDTO> findByBirthdateYear(@RequestParam("b") int year) {
 		return personService.findByBirthdateYear(year);
 	}
 	
 	@GetMapping("/birthdateBetween")
 	@ResponseBody
-	public Set<Person> findByBirthdateYearBetween(@RequestParam("b1") int year1, @RequestParam("b2") int year2) {
+	public Set<PersonDTO> findByBirthdateYearBetween(@RequestParam("b1") int year1, @RequestParam("b2") int year2) {
 		return personService.findByBirthdateYearBetween(year1, year2);
 	}
 	
 	@GetMapping ("/birthdateGreaterThan")
 	@ResponseBody
-	public Set<Person> findByBithdateYearGreaterThan(@RequestParam ("b") int year) {
+	public Set<PersonDTO> findByBithdateYearGreaterThan(@RequestParam ("b") int year) {
 		return personService.findByBithdateYearGreaterThan(year);
 	}
 	
 	@GetMapping("/nationalities")
 	@ResponseBody
-	public Set<Person> findByNationalities(@RequestParam("nat") Nationalities nationalities) {
+	public Set<PersonDTO> findByNationalities(@RequestParam("nat") Nationalities nationalities) {
 		return personService.findByNationalities(nationalities);
 	}
 	
@@ -96,31 +106,31 @@ public class PersonController {
 //	
 	@PostMapping ("/addPerson")
 	@ResponseBody
-	public Person addPerson(@RequestBody Person person) {
+	public PersonDTO addPerson(@RequestBody PersonDTO person) {
 	return personService.postPerson(person);
 	}
 
 	@PostMapping("/setNationalities")
 	@ResponseBody
-	public Optional<Person> setNationalities(@RequestParam("n") Nationalities nationalities, @RequestParam("p") int idPerson) {
+	public Optional<PersonDTO> setNationalities(@RequestParam("n") Nationalities nationalities, @RequestParam("p") int idPerson) {
 		return personService.postNationalitiesPerson(nationalities, idPerson);
 	}
 	
 	@PostMapping("/setBiography")
 	@ResponseBody
-	public Optional<Person> setBiography(@RequestParam("b") String biography, @RequestParam("p") int idPerson ) {
+	public Optional<PersonDTO> setBiography(@RequestParam("b") String biography, @RequestParam("p") int idPerson ) {
 		return personService.postBiographyPerson(biography, idPerson);
 	}
 	
 	@PutMapping("/modify")
 	@ResponseBody
-	public Optional<Person> modifyPerson (@RequestBody Person person ) {
+	public Optional<PersonDTO> modifyPerson (@RequestBody PersonDTO person ) {
 		return personService.postNameBirthdate(person);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseBody
-	public Optional<Person> deletePerson(@PathVariable("id") int idPerson) {
+	public Optional<PersonDTO> deletePerson(@PathVariable("id") int idPerson) {
 		return personService.deletePerson(idPerson);
 	}
 }

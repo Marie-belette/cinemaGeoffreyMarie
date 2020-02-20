@@ -123,13 +123,13 @@ public class MovieFull extends SimpleMovie {
 //		this.duration = duration;
 //	}
 //
-	public Person getDirector() {
-		return director;
-	}
-
-	public void setDirector(Person director) {
-		this.director = director;
-	}
+//	public Person getDirector() {
+//		return director;
+//	}
+//
+//	public void setDirector(Person director) {
+//		this.director = director;
+//	}
 //
 //	
 //	

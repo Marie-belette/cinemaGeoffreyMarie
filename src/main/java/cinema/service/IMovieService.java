@@ -35,7 +35,7 @@ public interface IMovieService {
 	Optional<MovieFull> postDirectorMovie (int idDirector, int idMovie);
 	Optional<MovieFull> postTitleYearDurationDirector(MovieFull movie) ;
 	
-	Optional<MovieFull> postGenreMovie(String genre, int idMovie);
+	Optional<MovieFull> postGenreMovie(List<String> genre, int idMovie);
 	Optional<MovieFull> postRatingMovie(Rating rating, int idMovie);
 	Optional<MovieFull> postClassificationMovie(Classification classification, int idMovie);
 	Optional<MovieFull> postSynopsisMovie(String synopsis, int idMovie);

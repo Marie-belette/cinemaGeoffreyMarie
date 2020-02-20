@@ -34,7 +34,7 @@ public class Movie {
 	private List<Person> actors;
 	private String originalTitle;
 	private Rating rating ;
-	private List<String> genres;
+	private List<String> genre;
 	private Format format;
 	private Classification classification;
 	private String synopsis;
@@ -47,7 +47,7 @@ public class Movie {
 		super();
 	}
 
-	public Movie(Integer idMovie, String title, String originalTitle, Integer year, Integer duration, Person director, List <String> genres, 
+	public Movie(Integer idMovie, String title, String originalTitle, Integer year, Integer duration, Person director, List <String> genre, 
 			Rating rating, Format format, Classification classification, String synopsis, Color color) {
 		super();
 		this.idMovie = idMovie;
@@ -57,7 +57,7 @@ public class Movie {
 		this.duration = duration;
 		this.director = director;
 		this.actors = new ArrayList<>();
-		this.genres = genres;
+		this.genre = new ArrayList<>();
 		this.rating = rating;
 		this.format = format;
 		this.classification = classification;
@@ -150,12 +150,12 @@ public class Movie {
 
 	@ElementCollection
 	@CollectionTable(joinColumns = @JoinColumn(name = "id_movie"))
-	public List<String> getGenres() {
-		return genres;
+	public List<String> getGenre() {
+		return genre;
 	}
 
-	public void setGenre(List<String> genres) {
-		this.genres = genres;
+	public void setGenre(List<String> genre) {
+		this.genre = genre;
 	}
 
 	public Format getFormat() {
