@@ -2,6 +2,7 @@ package cinema.persistence.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import cinema.enumeration.Classification;
@@ -39,10 +41,11 @@ public class Movie {
 	private Classification classification;
 	private String synopsis;
 	private Color color;
+	private Set<LikedMovies> likedMovies;
 	
-	//@Transient
-	// private String director; Ce sont les attributs qui ne sont pas "persistent", donc qui ne seront pas sauvegardés (côté Database)
-	
+//	@Transient
+//	 private String director; Ce sont les attributs qui ne sont pas "persistent", donc qui ne seront pas sauvegardés (côté Database)
+//	
 	public Movie() {
 		super();
 	}
@@ -212,6 +215,15 @@ public class Movie {
 		.append('#')
 		.append(idMovie)
 		.toString();
+	}
+
+	@OneToMany(mappedBy="movie")
+	public Set<LikedMovies> getLikedMovies() {
+		return likedMovies;
+	}
+
+	public void setLikedMovies(Set<LikedMovies> likedMovies) {
+		this.likedMovies = likedMovies;
 	}
 	
 }

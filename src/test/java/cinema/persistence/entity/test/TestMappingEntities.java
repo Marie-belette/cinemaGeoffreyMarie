@@ -3,8 +3,6 @@ package cinema.persistence.entity.test;
  * this is not a unit test case
  */
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,8 +15,10 @@ import org.springframework.test.annotation.Rollback;
 
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.entity.User;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
+import cinema.persistence.repository.UserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -29,6 +29,9 @@ class TestMappingEntities {
 	
 	@Autowired
 	MovieRepository repoMovies;
+	
+	@Autowired
+	UserRepository repoUsers;
 
 	@Rollback(false)
 	@Test
@@ -61,6 +64,16 @@ class TestMappingEntities {
 		var movies = List.of(
 				joker, parasite, interstellar, granTorino, impitoyable, americanSniper, veryBadTrip, avengersInfinityWar, avengersEndGame, avengers, captainMarvel, avengersAgeOfUltron, lesPleinsPouvoirs);
 		movies.forEach(repoMovies::save);
+	}
+	
+	@Rollback(false)
+	@Test
+	void testSaveUser() {
+		var marie = new User ("Belette", "Marie", "marie.maillos@gmail.com", "pw1234");
+		var geoffrey = new User ("Geoff", "Geoffrey", "emailbidon@bmail.com", "pw5678");
+		var jules = new User ("César", "Jules", "pasdebol@brutusmail.com", "pw9101112");
+		var users = List.of(marie, geoffrey,jules);
+		users.forEach(repoUsers::save);
 	}
 	
 	@Rollback(false)
