@@ -13,9 +13,9 @@ public class MovieLikingKey implements Serializable {
  */
 private static final long serialVersionUID = 1L;
 
-@Column(name="account_id")
-Long accountId;
+@Column(name="id_user")
+Integer idUser;
 
-@Column(name="movie_Id")
-Long movieID;
+@Column(name="id_movie")
+Integer idMovie;
 }

@@ -286,4 +286,15 @@ public class MovieService implements IMovieService {
 		return movieToDelete
 				.map(me -> mapper.map(me, MovieFull.class));
 	}
+
+	@Override
+	public Optional<MovieFull> putLike(int idMovie, int timesLiked){
+		var optMovie = movieRepository.findById(idMovie);
+		optMovie.ifPresent(m -> {
+			m.setTimesLiked(timesLiked);
+		});
+		movieRepository.flush();
+		return optMovie
+				.map(me -> mapper.map(me, MovieFull.class));
+	}
 }

@@ -27,6 +27,8 @@ public class MovieFull extends SimpleMovie {
 	private Format format;
 	private Classification classification;
 	private Color color;
+	private Integer timesLiked;
+	
 	public String getOriginalTitle() {
 		return originalTitle;
 	}
@@ -74,6 +76,12 @@ public class MovieFull extends SimpleMovie {
 	}
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	public Integer getTimesLiked() {
+		return timesLiked;
+	}
+	public void setTimesLiked(Integer timesLiked) {
+		this.timesLiked = timesLiked;
 	}
 	
 }

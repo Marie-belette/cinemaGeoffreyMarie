@@ -12,13 +12,31 @@ public class LikedMovies {
 	MovieLikingKey id;
 	
 	@ManyToOne
-	@MapsId("user_id")
-	@JoinColumn(name="user_id")
+	@MapsId("id_user")
+	@JoinColumn(name="id_user")
 	User user;
 	
 	@ManyToOne
-	@MapsId("movie_id")
-	@JoinColumn(name="movie_id")
+	@MapsId("id_movie")
+	@JoinColumn(name="id_movie")
 	Movie movie;
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+
+	
+	
 }

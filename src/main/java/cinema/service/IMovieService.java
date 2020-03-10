@@ -41,7 +41,9 @@ public interface IMovieService {
 	Optional<MovieFull> postSynopsisMovie(String synopsis, int idMovie);
 	Optional<MovieFull> postColorMovie(Color color, int idMovie);
 	Optional<MovieFull> postOriginalTitleMovie(String originalTitle, int idMovie);
+	Optional<MovieFull> putLike(int idMovie, int timesLiked);
 	
 	MovieFull addMovie(MovieFull movie);
 	Optional <MovieFull> deleteMovie (int idMovie);
+	
 }

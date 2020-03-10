@@ -69,9 +69,9 @@ class TestMappingEntities {
 	@Rollback(false)
 	@Test
 	void testSaveUser() {
-		var marie = new User ("Belette", "Marie", "marie.maillos@gmail.com", "pw1234");
-		var geoffrey = new User ("Geoff", "Geoffrey", "emailbidon@bmail.com", "pw5678");
-		var jules = new User ("César", "Jules", "pasdebol@brutusmail.com", "pw9101112");
+		var marie = new User ("Belette", "Marie", "marie.maillos@gmail.com", "pw1234", "belette");
+		var geoffrey = new User ("Geoff", "Geoffrey", "emailbidon@bmail.com", "pw5678", "geo");
+		var jules = new User ("César", "Jules", "pasdebol@brutusmail.com", "pw9101112", "brutus");
 		var users = List.of(marie, geoffrey,jules);
 		users.forEach(repoUsers::save);
 	}

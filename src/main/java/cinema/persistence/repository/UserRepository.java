@@ -1,5 +1,6 @@
 package cinema.persistence.repository;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	Set<User> findByFirstName(String firstName);
 	Set<User> findByEMail(String eMail);
+	Optional<User> findByUsername(String username);
 }

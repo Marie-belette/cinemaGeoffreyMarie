@@ -1,6 +1,7 @@
 package cinema.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cinema.dto.SimpleMovie;
-import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.User;
 import cinema.persistence.repository.UserRepository;
 import cinema.service.IUserService;
@@ -24,6 +23,11 @@ public class UserService implements IUserService {
 	@Override
 	public Set<User> getUserByFirstName(String firstName) {
 		return userRepository.findByFirstName(firstName);
+	}
+	
+	@Override
+	public Optional<User> getUserByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 
 	@Override

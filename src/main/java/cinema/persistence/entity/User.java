@@ -19,6 +19,7 @@ public class User {
 	private String firstName;
 	private String eMail;
 	private String password;
+	private String username;
 	private Set<LikedMovies> likedMovies;
 
 	public User() {
@@ -26,7 +27,7 @@ public class User {
 	}
 
 	public User(Integer idUser, String lastName, String firstName, String eMail, String password,
-			Set<LikedMovies> likedMovies) {
+			Set<LikedMovies> likedMovies, String username) {
 		super();
 		this.idUser = idUser;
 		this.lastName = lastName;
@@ -34,10 +35,11 @@ public class User {
 		this.eMail = eMail;
 		this.password = password;
 		this.likedMovies = likedMovies;
+		this.username = username;
 	}
 
-	public User(String lastName, String firstName, String eMail, String password) {
-		this(null, lastName, firstName, eMail, password, null);
+	public User(String lastName, String firstName, String eMail, String password, String username) {
+		this(null, lastName, firstName, eMail, password, null, username);
 	}
 
 	@Id
@@ -96,6 +98,16 @@ public class User {
 	public void setLikedMovies(Set<LikedMovies> likedMovies) {
 		this.likedMovies = likedMovies;
 	}
+
+	@Column(nullable = false)
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	
 	
 }

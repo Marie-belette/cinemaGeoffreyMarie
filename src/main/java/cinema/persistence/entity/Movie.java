@@ -41,6 +41,7 @@ public class Movie {
 	private Classification classification;
 	private String synopsis;
 	private Color color;
+	private Integer timesLiked;
 	private Set<LikedMovies> likedMovies;
 	
 //	@Transient
@@ -51,7 +52,7 @@ public class Movie {
 	}
 
 	public Movie(Integer idMovie, String title, String originalTitle, Integer year, Integer duration, Person director, List <String> genre, 
-			Rating rating, Format format, Classification classification, String synopsis, Color color) {
+			Rating rating, Format format, Classification classification, String synopsis, Color color, Integer timesLiked) {
 		super();
 		this.idMovie = idMovie;
 		this.title = title;
@@ -66,26 +67,27 @@ public class Movie {
 		this.classification = classification;
 		this.synopsis = synopsis;
 		this.color = color;
+		this.timesLiked = timesLiked;
 	}
 	
 	public Movie(String title, Integer year, Integer duration, Person director) {
-		this(null, title, null, year, duration, director, null, null, null, null, null, null);
+		this(null, title, null, year, duration, director, null, null, null, null, null, null, null);
 	}
 	
 	public Movie(String title, Integer year, Integer duration) {
-		this(null, title, null, year, duration, null, null, null, null, null, null, null);
+		this(null, title, null, year, duration, null, null, null, null, null, null, null, null);
 	}
 
 	public Movie(String title, Integer year) {
-		this(null, title, null, year, null, null, null, null, null, null, null, null);
+		this(null, title, null, year, null, null, null, null, null, null, null, null, null);
 	}
 	
 	public Movie(String title, Integer year, Person director) {
-		this(null, title, null, year, null, director, null, null, null, null, null, null);
+		this(null, title, null, year, null, director, null, null, null, null, null, null, null);
 	}
 	
 	public Movie(String title, String originalTitle, Integer year, Integer duration, Person director) {
-		this(null, title, originalTitle, year, duration, director, null, null, null, null, null, null);
+		this(null, title, originalTitle, year, duration, director, null, null, null, null, null, null, null);
 	}
 
 	@Id
@@ -224,6 +226,14 @@ public class Movie {
 
 	public void setLikedMovies(Set<LikedMovies> likedMovies) {
 		this.likedMovies = likedMovies;
+	}
+
+	public Integer getTimesLiked() {
+		return timesLiked;
+	}
+
+	public void setTimesLiked(Integer timesLiked) {
+		this.timesLiked = timesLiked;
 	}
 	
 }
