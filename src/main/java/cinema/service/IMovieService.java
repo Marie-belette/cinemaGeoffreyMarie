@@ -30,10 +30,13 @@ public interface IMovieService {
 	Set<SimpleMovie> getMovieByClassificationLessThan(Classification classification);
 	Set<SimpleMovie> getMovieByColor(Color color);
 	Set<SimpleMovie> getMovieBySynopsis(String synopsis);
+	Set<SimpleMovie> getMovieByUsersLiking(String username);
 	
 	Optional<MovieFull> postActorMovie (int idActor, int idMovie);
 	Optional<MovieFull> postDirectorMovie (int idDirector, int idMovie);
 	Optional<MovieFull> postTitleYearDurationDirector(MovieFull movie) ;
+	Optional<MovieFull> putUserLiking(String username, Integer idMovie);
+	Optional<MovieFull> eraseUserLiking(String username, Integer idMovie);
 	
 	Optional<MovieFull> postGenreMovie(List<String> genre, int idMovie);
 	Optional<MovieFull> postRatingMovie(Rating rating, int idMovie);
@@ -41,9 +44,13 @@ public interface IMovieService {
 	Optional<MovieFull> postSynopsisMovie(String synopsis, int idMovie);
 	Optional<MovieFull> postColorMovie(Color color, int idMovie);
 	Optional<MovieFull> postOriginalTitleMovie(String originalTitle, int idMovie);
-	Optional<MovieFull> putLike(int idMovie, int timesLiked);
+//	Optional<MovieFull> putLike(int idMovie, int timesLiked);
 	
 	MovieFull addMovie(MovieFull movie);
 	Optional <MovieFull> deleteMovie (int idMovie);
+	
+	
+	
+
 	
 }

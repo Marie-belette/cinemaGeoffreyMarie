@@ -5,10 +5,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.dto.UserDTO;
 import cinema.persistence.entity.User;
 import cinema.persistence.repository.UserRepository;
 import cinema.service.IUserService;
@@ -19,6 +21,9 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	ModelMapper mapper;
 
 	@Override
 	public Set<User> getUserByFirstName(String firstName) {
@@ -33,6 +38,11 @@ public class UserService implements IUserService {
 	@Override
 	public Set<User> getUserByEMail(String eMail) {
 		return userRepository.findByEMail(eMail);
+	}
+	
+	@Override
+	public Optional <User> getUserById(Integer idUser) {
+		return userRepository.findById(idUser);
 	}
 
 	@Override
@@ -50,6 +60,14 @@ public class UserService implements IUserService {
 		List<User> userEntities = userRepository.findAll();
 		return userEntities.stream()
 		.collect(Collectors.toList());
+	}
+	
+	@Override
+	public UserDTO addUser(UserDTO user) {
+		User userEntity = mapper.map(user, User.class);
+		userRepository.save(userEntity);
+		mapper.map(userEntity, user);
+		return user;
 	}
 
 }

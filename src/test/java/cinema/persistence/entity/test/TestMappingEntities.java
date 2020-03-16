@@ -5,6 +5,7 @@ package cinema.persistence.entity.test;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,19 @@ class TestMappingEntities {
 		var jules = new User ("César", "Jules", "pasdebol@brutusmail.com", "pw9101112", "brutus");
 		var users = List.of(marie, geoffrey,jules);
 		users.forEach(repoUsers::save);
+	}
+	
+	@Rollback(false)
+	@Test
+	void addUserLikingtoMovie() {
+		Optional<User> user = repoUsers.findByUsername("belette");
+		var movie = repoMovies.findByTitle("Parasite"); 
+		if (movie.size() > 0 && user.isPresent()) {
+		Movie parasite = movie.stream()
+					.findFirst().get();
+		parasite.getUsersLiking().add(user.get());
+		repoMovies.flush();
+		}
 	}
 	
 	@Rollback(false)

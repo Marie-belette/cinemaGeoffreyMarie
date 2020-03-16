@@ -10,7 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+//import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 @Table(name = "utilisateur")
 public class User {
 
@@ -20,26 +24,29 @@ public class User {
 	private String eMail;
 	private String password;
 	private String username;
-	private Set<LikedMovies> likedMovies;
+//	public Set<LikedMovies> likedMovies;
 
 	public User() {
 		super();
 	}
 
-	public User(Integer idUser, String lastName, String firstName, String eMail, String password,
-			Set<LikedMovies> likedMovies, String username) {
+	public User(Integer idUser, String lastName, String firstName, String eMail, String password, String username) {
 		super();
 		this.idUser = idUser;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.eMail = eMail;
 		this.password = password;
-		this.likedMovies = likedMovies;
+//		this.likedMovies = likedMovies;
 		this.username = username;
 	}
 
 	public User(String lastName, String firstName, String eMail, String password, String username) {
-		this(null, lastName, firstName, eMail, password, null, username);
+		this(null, lastName, firstName, eMail, password, username);
+	}
+	
+	public User(String password, String username, String eMail) {
+		this(null, null, eMail, null, password, username);
 	}
 
 	@Id
@@ -90,14 +97,14 @@ public class User {
 		this.password = password;
 	}
 
-	@OneToMany(mappedBy="user")
-	public Set<LikedMovies> getLikedMovies() {
-		return likedMovies;
-	}
-
-	public void setLikedMovies(Set<LikedMovies> likedMovies) {
-		this.likedMovies = likedMovies;
-	}
+//	@OneToMany(mappedBy="user")
+//	public Set<LikedMovies> getLikedMovies() {
+//		return likedMovies;
+//	}
+//
+//	public void setLikedMovies(Set<LikedMovies> likedMovies) {
+//		this.likedMovies = likedMovies;
+//	}
 
 	@Column(nullable = false)
 	public String getUsername() {

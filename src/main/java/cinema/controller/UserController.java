@@ -5,9 +5,12 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cinema.dto.LoginDTO;
+import cinema.dto.UserDTO;
 import cinema.persistence.entity.User;
 import cinema.service.IUserService;
 
@@ -38,6 +42,14 @@ public class UserController {
 	@ResponseBody
 	public Set<User> userByFirstName(@RequestParam("fn") String firstName) {
 		return userService.getUserByFirstName(firstName);
+	}
+	
+
+	@CrossOrigin
+	@GetMapping("/{id}")
+	@ResponseBody
+	public ResponseEntity<?> getUserById(@PathVariable("id")int idUser) {
+		return ResponseEntity.ok(userService.getUserById(idUser));
 	}
 	
 	@CrossOrigin
@@ -68,6 +80,13 @@ public class UserController {
 			}
 		}
 		throw new UsernameNotFoundException("username not found");
+	}
+	
+	@CrossOrigin
+	@PostMapping("/addUser")
+	@ResponseBody
+	public UserDTO addUser (@RequestBody UserDTO user) {
+		return userService.addUser(user);
 	}
 }
 

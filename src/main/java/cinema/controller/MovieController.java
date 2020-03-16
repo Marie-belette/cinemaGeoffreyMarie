@@ -80,6 +80,13 @@ public class MovieController {
 	}
 	
 	@CrossOrigin
+	@GetMapping("/byUserLiking")
+	@ResponseBody
+	public Set<SimpleMovie> movieByUserLiking(@RequestParam("un") String username) {
+		return movieService.getMovieByUsersLiking(username);
+	}
+	
+	@CrossOrigin
 	@GetMapping("/byDirectorId")
 	@ResponseBody
 	public Set<SimpleMovie> movieByDirectorId(@RequestParam("d") int idDirector) {
@@ -171,6 +178,21 @@ public class MovieController {
 	}
 	
 	@CrossOrigin
+	@PutMapping("/setUserLiking")
+	@ResponseBody
+	public  Optional<MovieFull> setUserLiking(@RequestParam("un") String username, @RequestParam("idM") Integer idMovie) {
+		return movieService.putUserLiking(username, idMovie);
+	}
+	
+	@CrossOrigin
+	@PutMapping("/eraseUserLiking")
+	@ResponseBody
+	public  Optional<MovieFull> eraseUserLiking(@RequestParam("un") String username, @RequestParam("idM") Integer idMovie) {
+		return movieService.eraseUserLiking(username, idMovie);
+	}
+
+	
+	@CrossOrigin
 	@PostMapping("/setOriginalTitle")
 	@ResponseBody
 	public  Optional<MovieFull> setOriginalTitle(@RequestParam("ot") String originalTitle, @RequestParam("m") int idMovie) {
@@ -212,12 +234,12 @@ public class MovieController {
 		return movieService.postColorMovie(color, idMovie);
 	}
 	
-	@CrossOrigin
-	@PutMapping("/setLike")
-	@ResponseBody
-	public Optional<MovieFull> setLike(@RequestParam ("id") int idMovie, @RequestParam ("like") int timesLiked) {
-		return movieService.putLike(idMovie, timesLiked);
-	}
+//	@CrossOrigin
+//	@PutMapping("/setLike")
+//	@ResponseBody
+//	public Optional<MovieFull> setLike(@RequestParam ("id") int idMovie, @RequestParam ("like") int timesLiked) {
+//		return movieService.putLike(idMovie, timesLiked);
+//	}
 	
 	@CrossOrigin
 	@PostMapping("/modify")

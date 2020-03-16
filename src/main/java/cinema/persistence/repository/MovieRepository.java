@@ -10,6 +10,7 @@ import cinema.enumeration.Format;
 import cinema.enumeration.Rating;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.entity.User;
 
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	
@@ -45,5 +46,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	Set<Movie> findBySynopsisContainingIgnoreCase(String synopsis);
 	
 	Set<Movie> findByClassificationLessThan(Classification classification);
+	Set<Movie> findByUsersLiking(User user);
 }
 

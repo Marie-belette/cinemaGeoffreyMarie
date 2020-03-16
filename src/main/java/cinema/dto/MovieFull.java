@@ -11,11 +11,13 @@ import java.util.List;
 //import javax.persistence.CollectionTable;
 //import javax.persistence.ElementCollection;
 //import javax.persistence.JoinColumn;
+import java.util.Set;
 
 import cinema.enumeration.Classification;
 import cinema.enumeration.Color;
 import cinema.enumeration.Format;
 import cinema.enumeration.Rating;
+import cinema.persistence.entity.User;
 
 public class MovieFull extends SimpleMovie {
 	
@@ -27,7 +29,9 @@ public class MovieFull extends SimpleMovie {
 	private Format format;
 	private Classification classification;
 	private Color color;
-	private Integer timesLiked;
+	private Set<User> usersLiking;
+//	private int numberUsersLiking;
+
 	
 	public String getOriginalTitle() {
 		return originalTitle;
@@ -77,11 +81,14 @@ public class MovieFull extends SimpleMovie {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	public Integer getTimesLiked() {
-		return timesLiked;
+	public Set<User> getUsersLiking() {
+		return usersLiking;
 	}
-	public void setTimesLiked(Integer timesLiked) {
-		this.timesLiked = timesLiked;
+	public void setUsersLiking(Set<User> usersLiking) {
+		this.usersLiking = usersLiking;
+	}
+	public int getNumberUsersLiking() {
+		return usersLiking.size();
 	}
 	
 }

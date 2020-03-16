@@ -15,8 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+//import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import cinema.enumeration.Classification;
 import cinema.enumeration.Color;
@@ -24,6 +26,7 @@ import cinema.enumeration.Format;
 import cinema.enumeration.Rating;
 
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 @Table(name = "movies")
 public class Movie {
 
@@ -41,8 +44,9 @@ public class Movie {
 	private Classification classification;
 	private String synopsis;
 	private Color color;
-	private Integer timesLiked;
-	private Set<LikedMovies> likedMovies;
+//	private Integer timesLiked;
+	public Set<User> usersLiking;
+//	public Set<LikedMovies> likedMovies;
 	
 //	@Transient
 //	 private String director; Ce sont les attributs qui ne sont pas "persistent", donc qui ne seront pas sauvegardés (côté Database)
@@ -52,7 +56,7 @@ public class Movie {
 	}
 
 	public Movie(Integer idMovie, String title, String originalTitle, Integer year, Integer duration, Person director, List <String> genre, 
-			Rating rating, Format format, Classification classification, String synopsis, Color color, Integer timesLiked) {
+			Rating rating, Format format, Classification classification, String synopsis, Color color) {
 		super();
 		this.idMovie = idMovie;
 		this.title = title;
@@ -67,27 +71,27 @@ public class Movie {
 		this.classification = classification;
 		this.synopsis = synopsis;
 		this.color = color;
-		this.timesLiked = timesLiked;
+//		this.timesLiked = timesLiked;
 	}
 	
 	public Movie(String title, Integer year, Integer duration, Person director) {
-		this(null, title, null, year, duration, director, null, null, null, null, null, null, null);
+		this(null, title, null, year, duration, director, null, null, null, null, null, null);
 	}
 	
 	public Movie(String title, Integer year, Integer duration) {
-		this(null, title, null, year, duration, null, null, null, null, null, null, null, null);
+		this(null, title, null, year, duration, null, null, null, null, null, null, null);
 	}
 
 	public Movie(String title, Integer year) {
-		this(null, title, null, year, null, null, null, null, null, null, null, null, null);
+		this(null, title, null, year, null, null, null, null, null, null, null, null);
 	}
 	
 	public Movie(String title, Integer year, Person director) {
-		this(null, title, null, year, null, director, null, null, null, null, null, null, null);
+		this(null, title, null, year, null, director, null, null, null, null, null, null);
 	}
 	
 	public Movie(String title, String originalTitle, Integer year, Integer duration, Person director) {
-		this(null, title, originalTitle, year, duration, director, null, null, null, null, null, null, null);
+		this(null, title, originalTitle, year, duration, director, null, null, null, null, null, null);
 	}
 
 	@Id
@@ -203,6 +207,19 @@ public class Movie {
 	public List<Person> getActors() {
 		return actors;
 	}
+	
+	@ManyToMany //(fetch = FetchType.EAGER)
+	@JoinTable(name="usersLiking",
+        joinColumns=@JoinColumn(name="id_movie"),
+        inverseJoinColumns=@JoinColumn(name="id_user")
+        )
+	public Set<User> getUsersLiking() {
+		return usersLiking;
+	}
+
+	public void setUsersLiking(Set<User> usersLiking) {
+		this.usersLiking = usersLiking;
+	}
 
 	public void setActors(List<Person> actors) {
 		this.actors = actors;
@@ -219,21 +236,21 @@ public class Movie {
 		.toString();
 	}
 
-	@OneToMany(mappedBy="movie")
-	public Set<LikedMovies> getLikedMovies() {
-		return likedMovies;
-	}
+//	@OneToMany(mappedBy="movie")
+//	public Set<LikedMovies> getLikedMovies() {
+//		return likedMovies;
+//	}
 
-	public void setLikedMovies(Set<LikedMovies> likedMovies) {
-		this.likedMovies = likedMovies;
-	}
+//	public void setLikedMovies(Set<LikedMovies> likedMovies) {
+//		this.likedMovies = likedMovies;
+//	}
 
-	public Integer getTimesLiked() {
-		return timesLiked;
-	}
-
-	public void setTimesLiked(Integer timesLiked) {
-		this.timesLiked = timesLiked;
-	}
+//	public Integer getTimesLiked() {
+//		return timesLiked;
+//	}
+//
+//	public void setTimesLiked(Integer timesLiked) {
+//		this.timesLiked = timesLiked;
+//	}
 	
 }

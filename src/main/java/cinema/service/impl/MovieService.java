@@ -19,8 +19,10 @@ import cinema.enumeration.Format;
 import cinema.enumeration.Rating;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.entity.User;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
+import cinema.persistence.repository.UserRepository;
 import cinema.service.IMovieService;
 
 @Service
@@ -32,6 +34,9 @@ public class MovieService implements IMovieService {
 	
 	@Autowired
 	PersonRepository personRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -163,6 +168,15 @@ public class MovieService implements IMovieService {
 				.map(me -> mapper.map(me, SimpleMovie.class))
 				.collect(Collectors.toSet());
 	}
+	
+	@Override
+	public Set<SimpleMovie> getMovieByUsersLiking(String username) {
+		Optional<User> thisUserLiking = userRepository.findByUsername(username);
+		Set<Movie> movieEntities = movieRepository.findByUsersLiking(thisUserLiking.get());
+		return movieEntities.stream()
+				.map(me -> mapper.map(me, SimpleMovie.class))
+				.collect(Collectors.toSet());
+	}
 
 	@Override
 	public Optional<MovieFull> postActorMovie(int idActor, int idMovie) {
@@ -186,6 +200,30 @@ public class MovieService implements IMovieService {
 		return optMovie
 				.map(me -> mapper.map(me, MovieFull.class));
 	}
+	
+	@Override
+	public Optional<MovieFull> putUserLiking(String username, Integer idMovie) {
+		var optMovie = movieRepository.findById(idMovie);
+		var optUser = userRepository.findByUsername(username);
+		if (optMovie.isPresent() && optUser.isPresent()) {
+			optMovie.get().getUsersLiking().add(optUser.get());
+		};
+		movieRepository.flush();
+		return optMovie
+				.map(me -> mapper.map(me, MovieFull.class));
+	}
+	
+	public  Optional<MovieFull> eraseUserLiking(String username, Integer idMovie) {
+		var optMovie =  movieRepository.findById(idMovie);
+		var optUser = userRepository.findByUsername(username);
+		if (optMovie.isPresent() && optUser.isPresent()) {
+			optMovie.get().getUsersLiking().remove(optUser.get());
+		};
+		movieRepository.flush();
+		return optMovie
+				.map(me -> mapper.map(me, MovieFull.class));
+	}
+		
 
 	@Override
 	public Optional<MovieFull> postTitleYearDurationDirector(MovieFull movie) {
@@ -287,14 +325,16 @@ public class MovieService implements IMovieService {
 				.map(me -> mapper.map(me, MovieFull.class));
 	}
 
-	@Override
-	public Optional<MovieFull> putLike(int idMovie, int timesLiked){
-		var optMovie = movieRepository.findById(idMovie);
-		optMovie.ifPresent(m -> {
-			m.setTimesLiked(timesLiked);
-		});
-		movieRepository.flush();
-		return optMovie
-				.map(me -> mapper.map(me, MovieFull.class));
-	}
+
+
+//	@Override
+//	public Optional<MovieFull> putLike(int idMovie, int timesLiked){
+//		var optMovie = movieRepository.findById(idMovie);
+//		optMovie.ifPresent(m -> {
+//			m.setTimesLiked(timesLiked);
+//		});
+//		movieRepository.flush();
+//		return optMovie
+//				.map(me -> mapper.map(me, MovieFull.class));
+//	}
 }

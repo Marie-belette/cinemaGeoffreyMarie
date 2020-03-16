@@ -1,10 +1,16 @@
 package cinema.dto;
 
+import java.util.Set;
+
+import cinema.persistence.entity.User;
+
 public class SimpleMovie {
 	
 	private Integer idMovie;
 	private String title;
 	private Integer year;
+	private Set<User> usersLiking;
+	
 	public Integer getIdMovie() {
 		return idMovie;
 	}
@@ -23,6 +29,13 @@ public class SimpleMovie {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	
-	
+	public Set<User> getUsersLiking() {
+		return usersLiking;
+	}
+	public void setUsersLiking(Set<User> usersLiking) {
+		this.usersLiking = usersLiking;
+	}
+	public int getNumberUsersLiking() {
+		return usersLiking.size();
+	}
 }
